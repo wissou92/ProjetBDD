@@ -2,9 +2,9 @@
 drop table if exists Coach , Adherant , Programme ,Exercice , Conseil_dietetique , Pratique , Coaching_sportif, Coaching_nutrition ;
 
 
-# bon wissam  moi je prefere faire la table et en dessous faire linsertion si la disposition te vas pas 
+# bon wissam  moi je prefere faire la table et en dessous faire linsertion 
 #  tu peux changer oklm on est ensemble mgl a jamais 
-#la note je sais que ces des etoiles mais en base  je lai representer comme un int avec une taille 
+#la note je sais que cest des etoiles mais  ici  je les ai representé comme un int avec une taille 
 # de 2  en gros une note sur 20 
 
 create table Coach (
@@ -160,6 +160,25 @@ create table Exercice (
 		description varchar(200) not null, 
 		prix_exercice int(3) not null
 ); 
+
+# bn monsieur wissou ici  ya rien de srx jai rempli quoi 
+#verifie bien 
+
+insert into Exercice values 
+(001 ,'développé couché'	,'musculation'  ,'permet de muscler l’ensemble des muscles de la poitrine et plus particulièrement le muscle grand pectoral', 0),
+(001 ,'Curl au pupitre'    ,'musculation'  ,'les bras sont placés en avant du torse  ce qui réduit l’étirement des biceps et augmente la tension dans la courte portion',0),
+(001 ,'squat' ,'musculation','permet de  travailler les muscles des cuisses et les fessiers. Il consiste à effectuer avec ou sans charge un mouvement de flexion des jambes avec une amplitude importante',0),
+(001 ,'mollets à la presse','musculation', 'permet de travailler les mollets avec des charges lourdes',0)
+(001, 'dips','musculation','efficace pour prendre la masse musculaire au niveau de la partie supérieure du corps et particulièrement au niveau muscles pectoraux (partie basse) et des triceps',0),
+(001,'extensions verticales','musculation', 'exercice qui permet un développement complet du triceps',0),
+(001,'extensions à la poulie','musculation','sollicite plus efficacement la longue portion du triceps',0),
+(001,'Développé nuque', 'musculation','exercice pour développer les épaules',0),
+(001,'crunch sur banc incliné','musculation',' important pour tous ceux qui veulent se muscler les abdos',0),
+(001,'relevé de jambes','musculation', 'efficace pour muscler les abdos',0),
+(001,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 0),
+(001,'fente à la barre','musculation','permet de travailler un grand nombre de muscles au niveau des jambes et de manière unilatérale',0),
+(001,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',0),
+(001,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',0);
 
 create table Conseil_dietetique (
 
