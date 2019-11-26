@@ -152,6 +152,14 @@ create table Programme (
 		avis int(2)
 ); 
 
+#jai rempli mais azy ca comme lautre truc 
+insert into Exercice values
+(001,'musculation','musculation',100,'développement des muscles squelettiques, afin dacquérir plus de force, dendurance, de puissance, dexplosivité ou de volume musculaire',015,15),
+(002,'remise en forme','remise en forme',100,'prendre soin de soi, perdre de la graisse, bouger plus, reprendre le sport ou faire plus de sport',012,15),
+(003,'cardio','cardio',100,'renforce tout votre système cardio-vasculaire',015,15),
+(004,'relaxation','relaxation',100,'oublie tes probleme et viens danser avec les magic system',020,20),
+(005,'personnalisé','personnalisé',150,'choix  de 20 exercices',017,20);
+
 create table Exercice (
 
 		id_programme int(3) not null, 
@@ -178,7 +186,20 @@ insert into Exercice values
 (001,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 0),
 (001,'fente à la barre','musculation','permet de travailler un grand nombre de muscles au niveau des jambes et de manière unilatérale',0),
 (001,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',0),
-(001,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',0);
+(001,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',0),
+
+(002,'squat','remise en forme',' muscler les cuisses et les fessiers (quadriceps, ischios-jambiers, mollets, fessiers)',0),
+(002,'planche abdominale','remise en forme','permet de renforcer les muscles superficiels et profonds des abdominaux',0),
+(002,'relevé du bassin au solo','remise en forme',' cible le grand fessier et les ischios jambiers',0),
+
+(003,'rameur','cardio','entretenir sa forme et se muscler harmonieusement',0),
+(003,'le tapis','cardio','Il mobilise un grand nombre de muscles, notamment le coeur',0),
+(003,'Vélos elliptiques','cardio','permet de travailler tous les muscles du corps, sollicite les cuisses, les fessiers et les mollets',0),
+(003,'Vélos elliptiques','cardio','',0),
+(003,'Jumping jacks','cardio','sollicite les muscles du bas du dos',0),
+(003,'Montées de genoux','cardio',' renforcer ses cuisses et fessiers et brûler des calories',0);
+
+
 
 create table Conseil_dietetique (
 
