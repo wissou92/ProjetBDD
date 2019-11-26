@@ -7,38 +7,160 @@ drop table if exists Coach , Adherant , Programme ,Exercice , Conseil_dietetique
 #la note je sais que cest des etoiles mais  ici  je les ai representé comme un int avec une taille 
 # de 2  en gros une note sur 20 
 
+/*
+-----------------------------------------------------------------------
+--------------------------TABLE----------------------------------------
+-----------------------------------------------------------------------
+*/
+
+/*
+-----------
+----COACH--
+-----------
+*/
 create table Coach (
 
-	  nom varchar(30) not null , 
-	  prenom varchar(30) not null, 
-	  experience varchar (30) not null, 
-	  note  int(2)
+	nom varchar(30) not null , 
+	prenom varchar(30) not null, 
+	experience varchar (30) not null, 
+	note  int(2)
 );
 
-insert into Coach values 
-   	   ('Lejeune' , 'Théophile' , '10 ans', 15),  
-	   ('Alphonse', 'Jodion', ' 5 ans ', 14 ), 
-	   ('Serhan' , 'Wissam' , '3 ans  ', 16),
-	   ('Mechri' , 'Fadi', ' 6 mois ', 18), 
-	   ('Pittis' , 'Thomas' ,'4 ans ' , 16),
-	   ('Harbin' , 'Vachon' ,'6ans', 10 ),
-	   ('Sarrazin' , 'Thibaut', '1 an', 9), 
-	   ('Gougeon' , 'Merlin ' ,'4 ans ' , 13),
-	   ('Gradasso' , 'Savard' ,'6ans', 13 ),
-	   ('Almeida Barros', 'Breno ', '10 ans', 15);
-
+/*
+--------------
+----ADHERENT--
+--------------
+*/
 
 create table Adherant (
 
-	   nom varchar(30) not null, 
-	   prenom varchar(30) not null, 
-	   email varchar(200) not null , 
-	   mdp varchar (100) not null,
-	   poids int(3) not null ,
-	   age int (3) not null ,
-	   taille int (3) not null 
+	nom varchar(30) not null, 
+	prenom varchar(30) not null, 
+	email varchar(200) not null , 
+	mdp varchar (100) not null,
+	poids int(3) not null ,
+	age int (3) not null ,
+	taille int (3) not null 
 ); 
 
+/*
+---------------
+----PROGRAMME--
+---------------
+*/
+
+create table Programme (
+
+	id  int (3) not null ,
+	nom varchar (30) not null, 
+	type varchar (30) not null, 
+	prix int (3) not null, 
+	description varchar(200) not null ,
+	difficulte  int (3) not null, 
+	avis int(2)
+);
+
+/*
+--------------
+----EXERCICE--
+--------------
+*/
+
+create table Exercice (
+
+	id_programme int(3) not null, 
+	nom_exercice varchar(30) not null, 
+	type  varchar(30) not null, 
+	description varchar(200) not null, 
+	prix_exercice int(3) not null
+); 
+
+/*
+------------------------
+----CONSEIL-DIETETIQUE--
+------------------------
+*/
+
+create table Conseil_dietetique (
+
+		id_programme  int(3) not null, 
+		nom_conseil   varchar(30) not null , 
+		type  varchar(30) not null, 
+		description varchar(200) not null, 
+		prix_conseil  int (3) not null
+);
+
+/*
+--------------
+----PRATIQUE--
+--------------
+*/
+
+create table Pratique (
+
+		email_adherent varchar(200) not null, 
+		id_programme int(3) not null, 
+		date_debut varchar(30) not null, 
+		date_fin   varchar(30) not null, 
+		avis int(2)
+);
+
+/*
+----------------------
+----COACHING-SPORTIF--
+----------------------
+*/
+
+create table Coaching_sportif (
+
+		nom_coach varchar(30) not null ,
+		prenom_coach  varchar(30) not null ,
+		email_adherent varchar(200) not null,
+		id_programme int(3) not null, 
+		nom_exercice varchar(30) not null, 
+		date_coaching  varchar (30) not null, 
+		avis int (2)
+);
+
+/*
+------------------------
+----COACHING-NUTRITION--
+------------------------
+*/
+
+create table Coaching_nutrition (
+		nom_coach varchar(30) not null,
+		prenom_coach varchar(30) not null,
+		email_adherent varchar(200) not null , 
+		id_programme int (3) not null, 
+		nom_conseil varchar(30) not null,
+		date_coaching varchar(30) not null, 
+		avis int (2) 
+);
+
+
+
+/*
+------------------------------------------------------------------------
+-------------------------INSERT-----------------------------------------
+------------------------------------------------------------------------
+*/
+
+insert into Coach values 
+   	('Lejeune' , 'Théophile' , '10 ans', 15),  
+	('Alphonse', 'Jodion', ' 5 ans ', 14 ), 
+	('Serhan' , 'Wissam' , '3 ans  ', 16),
+	('Mechri' , 'Fadi', ' 6 mois ', 18), 
+	('Pittis' , 'Thomas' ,'4 ans ' , 16),
+	('Harbin' , 'Vachon' ,'6ans', 10 ),
+	('Sarrazin' , 'Thibaut', '1 an', 9), 
+	('Gougeon' , 'Merlin ' ,'4 ans ' , 13),
+	('Gradasso' , 'Savard' ,'6ans', 13 ),
+	('Almeida Barros', 'Breno ', '10 ans', 15);
+
+
+
+# ptdrrr jss mort ton mdp xD
 
 insert into Adherant values
 	('Elhabar' 		, 'Moussa' 		, 'MoussaLebg@uvsq.fr'				,'lastreetzer'		,	60,22,190),
@@ -68,7 +190,7 @@ insert into Adherant values
 	('Bonenfant'	,'Guillaume'	, 'GuillaumeBonenfant@rhyta.com'	, 'dqsdqssdf' 		,80,35 ,168 ),
 	('Étienne '		,'Ruel'			, 'EtienneRuel@teleworm.us' 		, 'fdsfsdfsd'		, 80 , 40,157 ),
 	('Odo'			,'Deniger'		, 'OdoDeniger@teleworm.us'		    , 'dfsdfsdfsd'		, 75,35,180 ),
-	('Pouchard'		,'Christophe'	, 'ChristophePouchard@rhyta.com'	,'fdsASqsdq'		, 68 ,19 ,150 ),
+	('Pouchard'		,'Christophe'	, 'ChristophePouchard@rhyta.com'	,'fdsASqsdq'		, 68 ,19 ,160 ),
 	('Brochu'		,'Jay'			, 'JayBrochu@armyspy.com' 			, 'sdsdsdfdsfs' 	,80, 22,177),
 	('Mason '		,'Tanguay'		, 'MasonTanguay@armyspy.com'		, 'dfssdfsdfsdf' 	,90,18, 174),
 	('Octave'		,'Margand'		, 'OctaveMargand@armyspy.com' 		, 'fdsasaadaze' 	,70 , 22, 180),
@@ -141,16 +263,9 @@ insert into Adherant values
 	('Faure'		,'Beltane' 		,'BeltaneFaure@teleworm.us'				,'hshqshuydgqsd',95,45,167);
 	
 
-create table Programme (
 
-		id  int (3) not null ,
-		nom varchar (30) not null, 
-		type varchar (30) not null, 
-		prix int (3) not null, 
-		description varchar(200) not null ,
-		difficulte  int (3) not null, 
-		avis int(2)
-); 
+
+
 
 #jai rempli mais azy ca comme lautre truc 
 insert into Exercice values
@@ -160,14 +275,6 @@ insert into Exercice values
 (004,'relaxation','relaxation',100,'oublie tes probleme et viens danser avec les magic system',020,20),
 (005,'personnalisé','personnalisé',150,'choix  de 20 exercices',017,20);
 
-create table Exercice (
-
-		id_programme int(3) not null, 
-		nom_exercice varchar(30) not null, 
-		type  varchar(30) not null, 
-		description varchar(200) not null, 
-		prix_exercice int(3) not null
-); 
 
 # bn monsieur wissou ici  ya rien de srx jai rempli quoi 
 #verifie bien 
@@ -201,47 +308,6 @@ insert into Exercice values
 
 
 
-create table Conseil_dietetique (
-
-		id_programme  int(3) not null, 
-		nom_conseil   varchar(30) not null , 
-		type  varchar(30) not null, 
-		description varchar(200) not null, 
-		prix_conseil  int (3) not null
-);
-
-
-create table Pratique (
-
-		email_adherent varchar(200) not null, 
-		id_programme int(3) not null, 
-		date_debut varchar(30) not null, 
-		date_fin   varchar(30) not null, 
-		avis int(2)
-);
-
-
-create table Coaching_sportif (
-
-		nom_coach varchar(30) not null ,
-		prenom_coach  varchar(30) not null ,
-		email_adherent varchar(200) not null,
-		id_programme int(3) not null, 
-		nom_exercice varchar(30) not null, 
-		date_coaching  varchar (30) not null, 
-		avis int (2)
-);
-
-
-create table Coaching_nutrition (
-		nom_coach varchar(30) not null,
-		prenom_coach varchar(30) not null,
-		email_adherent varchar(200) not null , 
-		id_programme int (3) not null, 
-		nom_conseil varchar(30) not null,
-		date_coaching varchar(30) not null, 
-		avis int (2) 
-);
 
 
 
