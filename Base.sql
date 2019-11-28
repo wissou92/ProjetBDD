@@ -20,11 +20,11 @@ create type categorie as enum ('musculation', 'remise en forme', 'relaxation', '
 -----------
 */
 create table Coach (
-
 	nom 			varchar(30)		not null, 
 	prenom 			varchar(30) 	not null, 
 	experience 		varchar(30) 	not null, 
-	note  			int(2)
+	note  			int(2),
+	primary key (nom, prenom)
 );
 
 /*
@@ -41,7 +41,8 @@ create table Adherant (
 	mdp 			varchar(100) 	not null,
 	poids 			int(3) 			not null,
 	age 			int(3) 			not null,
-	taille 			int(3) 			not null 
+	taille 			int(3) 			not null,
+	primary key (email)
 ); 
 
 /*
@@ -52,13 +53,14 @@ create table Adherant (
 
 create table Programme (
 
-	id  			int(3) 			not null,
+	id  			int(3) 			auto_increment not null,
 	nom 			varchar(30) 	not null, 
 	categorie_programme categorie 	not null, 
 	prix 			int(3) 			not null, 
 	description 	varchar(200) 	not null,
 	difficulte  	int(3) 			not null, 
-	avis 			int(2)
+	avis 			int(2),
+	primary key (id)
 );
 
 
@@ -75,7 +77,9 @@ create table Exercice (
 	nom_exercice 	varchar(30) 	not null, 
 	categorie_exercice categorie 	not null, 
 	description 	varchar(200) 	not null, 
-	prix_exercice 	int(3) 			not null
+	prix_exercice 	int(3) 			not null,
+	primary key (id_programme, nom_exercice),
+	foreign key (id_programme) references Programme (id)
 ); 
 
 /*
@@ -90,7 +94,9 @@ create table Conseil_dietetique (
 	nom_conseil   	varchar(30) 	not null, 
 	categorie_conseil categorie 	not null, 
 	description 	varchar(200) 	not null, 
-	prix_conseil  	int (3) 		not null
+	prix_conseil  	int (3) 		not null,
+	primary key (id_programme, nom_conseil),
+	foreign key (id_programme) references Programme (id)
 );
 
 /*
@@ -100,12 +106,14 @@ create table Conseil_dietetique (
 */
 
 create table Pratique (
-
-	email_adherent 	varchar(200) 	not null, 
-	id_programme 	int(3) 			not null, 
 	date_debut 		date 			not null, 
 	date_fin   		date 			not null, 
 	avis 			int(2)
+	email_adherent 	varchar(200) 	not null, 
+	id_programme 	int(3) 			not null, 
+	primary key (email_adherent, id_programme),
+	foreign key (email_adherent) references Adherant (email),
+	foreign key (id_programme)	 references Programme (id)
 );
 
 /*
@@ -115,14 +123,16 @@ create table Pratique (
 */
 
 create table Coaching_sportif (
-
+	date_coaching  	date 			not null, 
+	avis 			int(2)
 	nom_coach 		varchar(30) 	not null,
 	prenom_coach  	varchar(30) 	not null,
 	email_adherent 	varchar(200) 	not null,
-	id_programme 	int(3) 			not null, 
 	nom_exercice 	varchar(30) 	not null, 
-	date_coaching  	date 			not null, 
-	avis 			int (2)
+	primary key (prenom_coach, email_adherent, nom_exercice),
+	foreign key (prenom_coach, nom_coach) references Coach (prenom, nom),
+	foreign key (email_adherent) references Adherant (email),
+	foreign key (nom_exercice) references Exercice (nom_exercice)
 );
 
 /*
@@ -132,13 +142,16 @@ create table Coaching_sportif (
 */
 
 create table Coaching_nutrition (
+	date_coaching 	date 	not null, 
+	avis 			int (2) 
 	nom_coach 		varchar(30) 	not null,
 	prenom_coach 	varchar(30) 	not null,
 	email_adherent 	varchar(200) 	not null, 
-	id_programme 	int(3) 			not null, 
 	nom_conseil 	varchar(30) 	not null,
-	date_coaching 	varchar(30) 	not null, 
-	avis 			int (2) 
+	primary key (prenom_coach, email_adherent, nom_conseil),
+	foreign key (prenom_coach, nom_coach) references Coach (prenom, nom),
+	foreign key (email_adherent) references Adherant (email),
+	foreign key (nom_conseil) references Exercice (nom_conseil)
 );
 
 
