@@ -4,8 +4,8 @@ DATE AU FORMAT AAAA-MM-JJ
 
 */
 
-drop table if exists Coach , Adherant , Programme ,Exercice , Conseil_dietetique , Pratique , Coaching_sportif, Coaching_nutrition ;
-create type categorie as enum ('musculation', 'remise en forme', 'relaxation', 'cardio');
+drop table if exists Pratique , Coaching_sportif, Coaching_nutrition, Coach , Adherant , Exercice , Conseil_dietetique, Programme ;
+/*create type categorie as enum ('musculation', 'remise en forme', 'relaxation', 'cardio');*/
 
 
 /*
@@ -20,11 +20,13 @@ create type categorie as enum ('musculation', 'remise en forme', 'relaxation', '
 -----------
 */
 create table Coach (
+	numero			int(2)			not null auto_increment,
 	nom 			varchar(30)		not null, 
 	prenom 			varchar(30) 	not null, 
 	experience 		varchar(30) 	not null, 
 	note  			int(2),
-	primary key (nom, prenom)
+	
+	primary key (numero)
 );
 
 /*
@@ -35,13 +37,14 @@ create table Coach (
 
 create table Adherant (
 
-	nom 			varchar(30) 	not null, 
+	nom 			varchar(30) 	not null , 
 	prenom 			varchar(30) 	not null, 
-	email 			varchar(200) 	not null, 
+	email 			varchar(56) 	not null, 
 	mdp 			varchar(100) 	not null,
 	poids 			int(3) 			not null,
 	age 			int(3) 			not null,
 	taille 			int(3) 			not null,
+	
 	primary key (email)
 ); 
 
@@ -53,13 +56,14 @@ create table Adherant (
 
 create table Programme (
 
-	id  			int(3) 			auto_increment not null,
+	id  			int(3) 			not null	auto_increment ,
 	nom 			varchar(30) 	not null, 
-	categorie_programme categorie 	not null, 
+	categorie_programme varchar(30)	not null, 
 	prix 			int(3) 			not null, 
 	description 	varchar(200) 	not null,
 	difficulte  	int(3) 			not null, 
 	avis 			int(2),
+	
 	primary key (id)
 );
 
@@ -75,9 +79,10 @@ create table Exercice (
 
 	id_programme 	int(3) 			not null, 
 	nom_exercice 	varchar(30) 	not null, 
-	categorie_exercice categorie 	not null, 
+	categorie_exercice varchar(30) 	not null, 
 	description 	varchar(200) 	not null, 
 	prix_exercice 	int(3) 			not null,
+	
 	primary key (id_programme, nom_exercice),
 	foreign key (id_programme) references Programme (id)
 ); 
@@ -92,9 +97,10 @@ create table Conseil_dietetique (
 
 	id_programme	int(3) 			not null, 
 	nom_conseil   	varchar(30) 	not null, 
-	categorie_conseil categorie 	not null, 
+	categorie_conseil varchar(30)     not null, 
 	description 	varchar(200) 	not null, 
 	prix_conseil  	int (3) 		not null,
+	
 	primary key (id_programme, nom_conseil),
 	foreign key (id_programme) references Programme (id)
 );
@@ -108,9 +114,10 @@ create table Conseil_dietetique (
 create table Pratique (
 	date_debut 		date 			not null, 
 	date_fin   		date 			not null, 
-	avis 			int(2)
-	email_adherent 	varchar(200) 	not null, 
+	avis 			int(2),
+	email_adherent 	varchar(54) 	not null, 
 	id_programme 	int(3) 			not null, 
+	
 	primary key (email_adherent, id_programme),
 	foreign key (email_adherent) references Adherant (email),
 	foreign key (id_programme)	 references Programme (id)
@@ -124,13 +131,13 @@ create table Pratique (
 
 create table Coaching_sportif (
 	date_coaching  	date 			not null, 
-	avis 			int(2)
-	nom_coach 		varchar(30) 	not null,
-	prenom_coach  	varchar(30) 	not null,
-	email_adherent 	varchar(200) 	not null,
-	nom_exercice 	varchar(30) 	not null, 
-	primary key (prenom_coach, email_adherent, nom_exercice),
-	foreign key (prenom_coach, nom_coach) references Coach (prenom, nom),
+	avis 			int(2),
+	numero_coach	int(2)          not null,
+	email_adherent 	varchar(54) 	not null,
+	nom_exercice 	varchar(30) 	not null,
+	 
+	primary key (numero_coach, email_adherent, nom_exercice),
+	foreign key (numero_coach) references Coach (numero),
 	foreign key (email_adherent) references Adherant (email),
 	foreign key (nom_exercice) references Exercice (nom_exercice)
 );
@@ -142,16 +149,17 @@ create table Coaching_sportif (
 */
 
 create table Coaching_nutrition (
-	date_coaching 	date 	not null, 
-	avis 			int (2) 
-	nom_coach 		varchar(30) 	not null,
-	prenom_coach 	varchar(30) 	not null,
-	email_adherent 	varchar(200) 	not null, 
+	date_coaching 	date 			not null, 
+	avis 			int (2),
+	numero_coach    int (2)         not null,
+	email_adherent 	varchar(54) 	not null, 
 	nom_conseil 	varchar(30) 	not null,
-	primary key (prenom_coach, email_adherent, nom_conseil),
-	foreign key (prenom_coach, nom_coach) references Coach (prenom, nom),
-	foreign key (email_adherent) references Adherant (email),
-	foreign key (nom_conseil) references Exercice (nom_conseil)
+	
+	primary key (numero_coach, email_adherent, nom_conseil),
+	
+	foreign key (numero_coach) 		references Coach (numero),
+	foreign key (email_adherent) 	references Adherant (email),
+	foreign key (nom_conseil) 		references Exercice (nom_conseil)
 );
 
 
@@ -169,17 +177,18 @@ create table Coaching_nutrition (
 -----------
 */
 
-insert into Coach values 
-   	('Lejeune' , 'Théophile' , '10 ans', 15),  
-	('Alphonse', 'Jodion', ' 5 ans ', 14 ), 
-	('Serhan' , 'Wissam' , '3 ans  ', 16),
-	('Mechri' , 'Fadi', ' 6 mois ', 18), 
-	('Pittis' , 'Thomas' ,'4 ans ' , 16),
-	('Harbin' , 'Vachon' ,'6ans', 10 ),
-	('Sarrazin' , 'Thibaut', '1 an', 9), 
-	('Gougeon' , 'Merlin ' ,'4 ans ' , 13),
-	('Gradasso' , 'Savard' ,'6ans', 13 ),
-	('Almeida Barros', 'Breno ', '10 ans', 15);
+insert into Coach values
+ 
+   	(,'Lejeune' , 'Théophile' , '10 ans', 15),  
+	(,'Alphonse', 'Jodion', ' 5 ans ', 14 ), 
+	(,'Serhan' , 'Wissam' , '3 ans  ', 16),
+	(,'Mechri' , 'Fadi', ' 6 mois ', 18), 
+	(,'Pittis' , 'Thomas' ,'4 ans ' , 16),
+	(,'Harbin' , 'Vachon' ,'6ans', 10 ),
+	(,'Sarrazin' , 'Thibaut', '1 an', 9), 
+	(,'Gougeon' , 'Merlin ' ,'4 ans ' , 13),
+	(,'Gradasso' , 'Savard' ,'6 ans', 13 ),
+	(,'Almeida Barros', 'Breno ', '10 ans', 15);
 
 
 /*
@@ -303,11 +312,12 @@ insert into Adherant values
 */
 
 insert into Programme values
-(001,'musculation','musculation',100,'développement des muscles squelettiques, afin dacquérir plus de force, dendurance, de puissance, dexplosivité ou de volume musculaire',015,15),
-(002,'remise en forme','remise en forme',100,'prendre soin de soi, perdre de la graisse, bouger plus, reprendre le sport ou faire plus de sport',012,15),
-(003,'cardio','cardio',100,'renforce tout votre système cardio-vasculaire',015,15),
-(004,'relaxation','relaxation',100,'oublie tes probleme et viens danser avec les magic system',020,20),
-(005,'personnalisé','personnalisé',150,'choix  de 20 exercices',017,20);
+
+	( ,'musculation','musculation',100,'développement des muscles squelettiques, afin dacquérir plus de force, dendurance, de puissance, dexplosivité ou de volume musculaire',015,15),
+	( ,'remise en forme','remise en forme',100,'prendre soin de soi, perdre de la graisse, bouger plus, reprendre le sport ou faire plus de sport',012,15),
+	( ,'cardio','cardio',100,'renforce tout votre système cardio-vasculaire',015,15),
+	( ,'relaxation','relaxation',100,'oublie tes probleme et viens danser avec les magic system',020,20),
+	( ,'personnalisé','personnalisé',150,'choix  de 20 exercices',017,20);
 
 /*
 --------------
@@ -316,31 +326,31 @@ insert into Programme values
 */ 
 
 insert into Exercice values 
-(001 ,'développé couché'	,'musculation'  ,'permet de muscler l’ensemble des muscles de la poitrine et plus particulièrement le muscle grand pectoral', 0),
-(001 ,'Curl au pupitre'    ,'musculation'  ,'les bras sont placés en avant du torse  ce qui réduit l’étirement des biceps et augmente la tension dans la courte portion',0),
-(001 ,'squat' ,'musculation','permet de  travailler les muscles des cuisses et les fessiers. Il consiste à effectuer avec ou sans charge un mouvement de flexion des jambes avec une amplitude importante',0),
-(001 ,'mollets à la presse','musculation', 'permet de travailler les mollets avec des charges lourdes',0)
-(001, 'dips','musculation','efficace pour prendre la masse musculaire au niveau de la partie supérieure du corps et particulièrement au niveau muscles pectoraux (partie basse) et des triceps',0),
-(001,'extensions verticales','musculation', 'exercice qui permet un développement complet du triceps',0),
-(001,'extensions à la poulie','musculation','sollicite plus efficacement la longue portion du triceps',0),
-(001,'Développé nuque', 'musculation','exercice pour développer les épaules',0),
-(001,'crunch sur banc incliné','musculation',' important pour tous ceux qui veulent se muscler les abdos',0),
-(001,'relevé de jambes','musculation', 'efficace pour muscler les abdos',0),
-(001,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 0),
-(001,'fente à la barre','musculation','permet de travailler un grand nombre de muscles au niveau des jambes et de manière unilatérale',0),
-(001,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',0),
-(001,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',0),
+	(001 ,'développé couché'	,'musculation'  ,'permet de muscler l’ensemble des muscles de la poitrine et plus particulièrement le muscle grand pectoral', 0),
+	(001 ,'Curl au pupitre'    ,'musculation'  ,'les bras sont placés en avant du torse  ce qui réduit l’étirement des biceps et augmente la tension dans la courte portion',0),
+	(001 ,'squat' ,'musculation','permet de  travailler les muscles des cuisses et les fessiers. Il consiste à effectuer avec ou sans charge un mouvement de flexion des jambes avec une amplitude importante',0),
+	(001 ,'mollets à la presse','musculation', 'permet de travailler les mollets avec des charges lourdes',0)
+	(001, 'dips','musculation','efficace pour prendre la masse musculaire au niveau de la partie supérieure du corps et particulièrement au niveau muscles pectoraux (partie basse) et des triceps',0),
+	(001,'extensions verticales','musculation', 'exercice qui permet un développement complet du triceps',0),
+	(001,'extensions à la poulie','musculation','sollicite plus efficacement la longue portion du triceps',0),
+	(001,'Développé nuque', 'musculation','exercice pour développer les épaules',0),
+	(001,'crunch sur banc incliné','musculation',' important pour tous ceux qui veulent se muscler les abdos',0),
+	(001,'relevé de jambes','musculation', 'efficace pour muscler les abdos',0),
+	(001,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 0),
+	(001,'fente à la barre','musculation','permet de travailler un grand nombre de muscles au niveau des jambes et de manière unilatérale',0),
+	(001,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',0),
+	(001,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',0),
 
-(002,'squat','remise en forme',' muscler les cuisses et les fessiers (quadriceps, ischios-jambiers, mollets, fessiers)',0),
-(002,'planche abdominale','remise en forme','permet de renforcer les muscles superficiels et profonds des abdominaux',0),
-(002,'relevé du bassin au solo','remise en forme',' cible le grand fessier et les ischios jambiers',0),
+	(002,'squat','remise en forme',' muscler les cuisses et les fessiers (quadriceps, ischios-jambiers, mollets, fessiers)',0),
+	(002,'planche abdominale','remise en forme','permet de renforcer les muscles superficiels et profonds des abdominaux',0),
+	(002,'relevé du bassin au solo','remise en forme',' cible le grand fessier et les ischios jambiers',0),
 
-(003,'rameur','cardio','entretenir sa forme et se muscler harmonieusement',0),
-(003,'le tapis','cardio','Il mobilise un grand nombre de muscles, notamment le coeur',0),
-(003,'Vélos elliptiques','cardio','permet de travailler tous les muscles du corps, sollicite les cuisses, les fessiers et les mollets',0),
-(003,'Vélos elliptiques','cardio','',0),
-(003,'Jumping jacks','cardio','sollicite les muscles du bas du dos',0),
-(003,'Montées de genoux','cardio',' renforcer ses cuisses et fessiers et brûler des calories',0);
+	(003,'rameur','cardio','entretenir sa forme et se muscler harmonieusement',0),
+	(003,'le tapis','cardio','Il mobilise un grand nombre de muscles, notamment le coeur',0),
+	(003,'Vélos elliptiques','cardio','permet de travailler tous les muscles du corps, sollicite les cuisses, les fessiers et les mollets',0),
+	(003,'Vélos elliptiques','cardio','',0),
+	(003,'Jumping jacks','cardio','sollicite les muscles du bas du dos',0),
+	(003,'Montées de genoux','cardio',' renforcer ses cuisses et fessiers et brûler des calories',0);
 
 /*
 ------------------------
@@ -400,45 +410,16 @@ insert into Exercice values
 
 /* Vue sur les coachs et leur coaching et avis (nutrition et sportif) 
 nous permettra de faire une moyenne sur les avis d'un coach */
+
+
 create view Coaching_general
 as select prenom_coach nom_coach date_coaching avis
-from Coaching_nutrition
+from Coaching_nutrition Coaching_sportif
 union
 select prenom_coach nom_coach date_coaching avis
 from Coaching_sportif
 
-/* */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-------------------------------------------------------------------------
-------------------------------REQUETE-----------------------------------
-------------------------------------------------------------------------
-*/
-/* Requete dont on aura besoin */
-/* liste des coachs */
-select prenom, nom
-from Coach;
-
-/* liste des coaching d'un coach voir avec la vue plus haut jai un doute */
-select nom_coach date_coaching avis
-from Coaching_nutrition N, Coaching_sportif S
-where N.nom_coach = 'exemple' or S.nom_coach = 'exemple'
-
+/*  */
 
 
 
