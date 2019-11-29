@@ -386,13 +386,28 @@ insert into Exercice values
 
 
 
+
+
+
+
+
+
 /*
 ------------------------------------------------------------------------
 ----------------------------VIEWS---------------------------------------
 ------------------------------------------------------------------------
 */
 
+/* Vue sur les coachs et leur coaching et avis (nutrition et sportif) 
+nous permettra de faire une moyenne sur les avis d'un coach */
+create view Coaching_general
+as select prenom_coach nom_coach date_coaching avis
+from Coaching_nutrition
+union
+select prenom_coach nom_coach date_coaching avis
+from Coaching_sportif
 
+/* */
 
 
 
@@ -414,11 +429,15 @@ insert into Exercice values
 ------------------------------REQUETE-----------------------------------
 ------------------------------------------------------------------------
 */
+/* Requete dont on aura besoin */
+/* liste des coachs */
+select prenom, nom
+from Coach;
 
-
-
-
-
+/* liste des coaching d'un coach voir avec la vue plus haut jai un doute */
+select nom_coach date_coaching avis
+from Coaching_nutrition N, Coaching_sportif S
+where N.nom_coach = 'exemple' or S.nom_coach = 'exemple'
 
 
 
