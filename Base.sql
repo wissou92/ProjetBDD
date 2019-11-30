@@ -12,9 +12,8 @@ drop table if exists Pratique , Coaching_sportif, Coaching_nutrition, Coach , Ad
 # wissam evite les enum globaux par ce que ca bug sur mysql 
 # et les cle primaire composé dans les tables parents
 #dsl jai enlevé  les commentaire mais elles me rendent malades on les remetra apres 
-# jai essayer de remplir les 4 derniers tables 
-#jai tester rien se saffiche 
-# enfin bref ca compile 
+#quand je me connecte sur wissam jai rien or jai donnné le droi tdacces a la base programmes 
+# ma3lich ca on vera al fin 
  
 
 /*
