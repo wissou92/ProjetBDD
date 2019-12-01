@@ -1,26 +1,23 @@
-drop database if exists Programmes_Sportifs; 
+drop database if exists Programmes_Sportifs ; 
+
 create database Programmes_Sportifs;
- 
+
 drop user 'admin'@'localhost';
+
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'wissam';
-GRANT ALL PRIVILEGES ON Programmes_Sportifs . * TO 'admin'@'root';
+CREATE USER 'utilisateur'@'localhost' IDENTIFIED BY 'moussa';
+
 use Programmes_Sportifs ;
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'root';
+
 drop table if exists Pratique , Coaching_sportif, Coaching_nutrition, Coach , Adherant , Exercice , Conseil_dietetique, Programme ;
 
 
+#il manque mes droit dacces  pour mon user 
+#je dois pas voir les mdp 
+#mets les requetes tout en bas du fichier 
 
-# wissam evite les enum globaux par ce que ca bug sur mysql 
-# et les cle primaire composé dans les tables parents
-#dsl jai enlevé  les commentaire mais elles me rendent malades on les remetra apres 
-#quand je me connecte sur wissam jai rien or jai donnné le droi tdacces a la base programmes 
-# ma3lich ca on vera al fin 
- 
-
-/*
-===========
-	Tables:
-===========
-*/
 
 create table Coach (
 	numero			int(2)			not null,
@@ -146,9 +143,9 @@ create table Coaching_nutrition (
 
 
 /*
-===========
+===============
 	Insertions:
-===========
+===============
 */
 
 insert into Coach values
@@ -293,30 +290,30 @@ insert into Programme values
 
 
 insert into Exercice values 
-	(001, 100 , 'développé couché'   ,'musculation' , 'permet de muscler l’ensemble des muscles de la poitrine et plus particulièrement le muscle grand pectoral', 000),
-	(001, 101 ,'Curl au pupitre'    ,'musculation' , 'les bras sont placés en avant du torse  ce qui réduit l’étirement des biceps et augmente la tension dans la courte portion',000),
+	(001, 100 , 'développé couché'   ,'musculation' , 'permet de muscler l’ensemble des muscles de la poitrine et plus particulièrement le muscle grand pectoral', 010),
+	(001, 101 ,'Curl au pupitre'    ,'musculation' , 'les bras sont placés en avant du torse  ce qui réduit l’étirement des biceps et augmente la tension dans la courte portion',030),
 	(001, 102 ,'squat'              ,'musculation' ,'permet de  travailler les muscles des cuisses et les fessiers. Il consiste à effectuer un mouvement de flexion des jambes avec une amplitude importante',000),
-	(001, 103 ,'mollets à la presse','musculation' , 'permet de travailler les mollets avec des charges lourdes',000),
-	(001, 104 ,'dips'               ,'musculation' ,'efficace pour prendre la masse musculaire au niveau des pectoraux  et des triceps',000),
-	(001, 105 ,'extensions verticales','musculation', 'exercice qui permet un développement complet du triceps',000),
-	(001, 106 ,'extensions à la poulie','musculation','sollicite plus efficacement la longue portion du triceps',000),
-	(001, 107 ,'Développé nuque', 'musculation','exercice pour développer les épaules',000),
-	(001, 108 ,'crunch sur banc incliné','musculation',' important pour tous ceux qui veulent se muscler les abdos',000),
-	(001, 109 ,'relevé de jambes','musculation', 'efficace pour muscler les abdos',000),
-	(001, 110 ,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 000),
+	(001, 103 ,'mollets à la presse','musculation' , 'permet de travailler les mollets avec des charges lourdes',050),
+	(001, 104 ,'dips'               ,'musculation' ,'efficace pour prendre la masse musculaire au niveau des pectoraux  et des triceps',030),
+	(001, 105 ,'extensions verticales','musculation', 'exercice qui permet un développement complet du triceps',006),
+	(001, 106 ,'extensions à la poulie','musculation','sollicite plus efficacement la longue portion du triceps',007),
+	(001, 107 ,'Développé nuque', 'musculation','exercice pour développer les épaules',003),
+	(001, 108 ,'crunch sur banc incliné','musculation',' important pour tous ceux qui veulent se muscler les abdos',050),
+	(001, 109 ,'relevé de jambes','musculation', 'efficace pour muscler les abdos',001),
+	(001, 110 ,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 010),
 	(001, 111 ,'fente à la barre','musculation','permet de travailler un grand nombre de muscles au niveau des jambes et de manière unilatérale',000),
-	(001, 123 ,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',000),
-	(001, 124 ,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',000),
+	(001, 123 ,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',001),
+	(001, 124 ,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',001),
 
 	
 	(002,201  , 'planche abdominale','remise_en_forme','permet de renforcer les muscles superficiels et profonds des abdominaux',000),
-	(002,202  , 'relevé du bassin au solo','remise_en_forme',' cible le grand fessier et les ischios jambiers',000),
+	(002,202  , 'relevé du bassin au solo','remise_en_forme',' cible le grand fessier et les ischios jambiers',002),
 
-	(003,301  , 'rameur','cardio','entretenir sa forme et se muscler harmonieusement',000),
-	(003,302  , 'le tapis','cardio','Il mobilise un grand nombre de muscles, notamment le coeur',000),
-	(003,303  , 'Vélos elliptiques','cardio','permet de travailler tous les muscles du corps, sollicite les cuisses, les fessiers et les mollets',000),
-	(003,304  , 'Jumping jacks','cardio','sollicite les muscles du bas du dos',000),
-	(003,305  , 'Montées de genoux','cardio',' renforcer ses cuisses et fessiers et brûler des calories',000);
+	(003,301  , 'rameur','cardio','entretenir sa forme et se muscler harmonieusement',030),
+	(003,302  , 'le tapis','cardio','Il mobilise un grand nombre de muscles, notamment le coeur',005),
+	(003,303  , 'Vélos elliptiques','cardio','permet de travailler tous les muscles du corps, sollicite les cuisses, les fessiers et les mollets',003),
+	(003,304  , 'Jumping jacks','cardio','sollicite les muscles du bas du dos',008),
+	(003,305  , 'Montées de genoux','cardio',' renforcer ses cuisses et fessiers et brûler des calories',050);
 
 
 
@@ -336,31 +333,94 @@ insert into Exercice values
 	insert into Coaching_sportif values 
 
 		('12.09.2019',00,01,'CharlotBoncoeur@jourrapide.com',102),
-		('13.09.2019',15,02,'LouisHetu@teleworm.us',103),
-		('14.07.2020',17,04,'CurtisForest@rhyta.com',201);
+		('13.09.2019',15,02,'LouisHetu@teleworm.us'	,103),
+		('14.07.2020',17,04,'CurtisForest@rhyta.com',201),
+		('20.07.2021',00,06,'IsaacCote@armyspy.com',301),
+		('20.08.2021',15,05,'AntoineSimon@jourrapide.com',302),
+		('21.09.2021',10,08,'ScovilleGareau@dayrep.com',304),
+		('23.09.2021',13,09,'CheneyGuernon@jourrapide.com',305);
+		
+
+
 
  	insert into Coaching_nutrition values
- 		('12.10.2019'	,00	,01		,'CharlotBoncoeur@jourrapide.com'	,'regime'	,102),
-		('13.11.2019'	,15	,02		,'LouisHetu@teleworm.us'			,'blalaba'	,103),
-		('14.1.2020' 	,17	,03		,'CurtisForest@rhyta.com'			,'hhhhhhhh'	,201);
+ 		('12.10.2019'	,00	,01		,'CharlotBoncoeur@jourrapide.com'	,'regime'		,102),
+		('13.11.2019'	,15	,02		,'LouisHetu@teleworm.us'			,'blalabaezae'	,103),
+		('14.1.2020' 	,17	,03		,'CurtisForest@rhyta.com'			,'hhhhhhhhzeae'	,201),
+		('14.2.2021'	,19	,06     ,'BeltaneFaure@teleworm.us' 		, 'ramadan'		,202);
 
 
+#jarrive pas la faire fonctionner celle la 
+# mais en gros update avec le prix des exo 
+#que le programme contient 
 
-
-/*
-
-	create view Coaching_general
-	as select prenom_coach nom_coach date_coaching avis
-	from Coaching_nutrition Coaching_sportif Coach
-	union
-	select prenom_coach nom_coach date_coaching avis
-	from Coaching_sportif
+/* 	 update  Programme 
+  	 set Programme.prix = (  select sum(s1 + s2) 
+  	 from (
+  			
+  			(select sum (Exercice.prix) as s1 
+		     from  Exercice 
+			 where Programme.id = Exercice.id_programme) 
+		
+		union all   			
+			
+			(select sum (Conseil_dietetique.prix_conseil) as s2
+			 from Conseil_dietetique 
+			 where  Programme.id = Conseil_dietetique.id_programme) 
+			
+		 )
+  	);
 
 */
 
 
 
+create view  imc 
+  as select Adherant.poids , Adherant.taille , 
+  (Adherant.poids/power(Adherant.taille/100,2)) as imc   
+  from Adherant;
 
+
+  #ici je veux cree une vue qui affiche les nombre de coachinf total 
+# de chaque coach 
+
+create view  nb_coaching_s
+	as 	select Coaching_sportif.numero_coach,
+		count(distinct Coaching_sportif.numero_coach) as nb_coaching
+		from  Coaching_sportif 
+		group by Coaching_sportif.numero_coach;
+
+create view  nb_coaching_n
+	as 	select Coaching_nutrition.numero_coach,
+		count(distinct Coaching_nutrition.numero_coach) as nb_coaching
+		from  Coaching_nutrition 
+		group by Coaching_nutrition.numero_coach;
+
+
+
+# requete qui affiche limc de chaque adherant et son etat 
+select   A.prenom , A.nom, A.age, imc.imc,
+
+ (case 
+ when 25> imc.imc >18  then 'corpulence normale'
+ when 30> imc.imc >25  then 'surpoids'
+ when  	  imc.imc >30 	 then 'obésité'
+ else 'maigreur'
+ end ) as etat
+ from Adherant A , imc   
+ where( A.poids  = imc.poids  and   A.taille = imc.taille);
+
+
+# ici met une requte qui somme les deux vues et qui affiche les nombre 
+# total de coaching de chaque coach 
+
+
+
+#exemple de requets que lon porrait mettre 
+#classement des cochs par  par leurs note dans tout 
+#le truc la de oumaima sur les prix on baisse le prix du 3 eme programme si ladherant a deja 2 programmes 
+#apres on met des truc trivials par ce que cest chaud 
+#on doit imprimer  et oublie pas d'imprimer le rapport 
 
 
 
