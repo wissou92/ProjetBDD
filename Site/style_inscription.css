@@ -83,3 +83,7 @@ button:hover {
 	*/
 }
 
+.warning {
+	font-size: 10px;
+	color: red;
+}
