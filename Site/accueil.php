@@ -10,10 +10,10 @@
 
 <div class="bt">
 <button
- onclick="window.location.href= 'http://localhost/Projet/Connexion.php';" id ="b2">connexions
+ onclick="window.location.href= 'http://localhost//ProjetBDD/Site/Connexion.php';" id ="b2">connexions
 </button>
 <button
- onclick="window.location.href='http://localhost/Projet/Inscription.php';" id ="b1">inscription
+ onclick="window.location.href='http://localhost/ProjetBDD/Site/Inscription.php';" id ="b1">inscription
 </button>
 </div> 
 
