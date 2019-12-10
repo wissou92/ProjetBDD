@@ -27,15 +27,12 @@
 	</form>
  <?php 
  session_start();
-  
   $email ; $mdp;  
-   if ( isset($_POST)){
-   	 if(!empty($_POST['email_adherent'])){
-   	   		$email = $_POST['email_adherent'];
-   	    }
-   	 if(!empty($_POST['mdp_adherent'])){  
-   	 		$mdp = $_POST['mdp_adherent'];
-   	 	}
+   if( isset($_POST))
+   {
+   	 if(!empty($_POST['email_adherent'])){ $email = $_POST['email_adherent'];}
+
+   	 if(!empty($_POST['mdp_adherent'])){  $mdp = $_POST['mdp_adherent'];}
 
 
 try{    
@@ -60,9 +57,7 @@ catch (Exception $e)
 }
   
 }
+
 ?>
-
- 
-
 </body>
 </html>
