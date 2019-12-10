@@ -48,6 +48,7 @@ query ("select email,mdp from Adherant where email = '$email' and mdp = '$mdp'")
 
          if( mysqli_num_rows($resultat))
         {
+			$_SESSION["email"] = $email ; 
         	header("Location:Userconnecte.php");
         	exit;
         }
