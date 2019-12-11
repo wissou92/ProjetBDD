@@ -33,6 +33,23 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
      
     printf("Bienvenue %s  %s ",$nom , $prenom);
  ?> 
+
+<div > 
+<form method="post" action="accueil.php">
+	<input id = "dec" type="submit" value="Se déconnecter" name="deconnect" /> </input>
+ 
+ <?php 
+
+ 		session_start();
+ 		if(isset($_POST['deconnect']) AND $_POST['deconnect']=='Se déconnecter'){
+		session_destroy();
+		header('location:accueil.php');
+		exit;
+	}
+?> 
+</form>
+</div>
+
 </head>
 
 <body>
