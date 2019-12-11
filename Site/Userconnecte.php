@@ -7,11 +7,7 @@
 	</title>
 	
 	<link rel="stylesheet" type="text/css"  href="Style_Userconnecte.css">
-</head>
-
-<body>
-	<h1>Programmes Sportifs</h1>
-<section  id = "np">
+	<section  id = "np">
 <?php 
    session_start();  $nom ;  $prenom; 
 try
@@ -37,6 +33,11 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
      
     printf("Bienvenue %s  %s ",$nom , $prenom);
  ?> 
+</head>
+
+<body>
+	<h1>Programmes Sportifs</h1>
+
  </section>
 
 
