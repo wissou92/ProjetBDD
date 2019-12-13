@@ -21,7 +21,7 @@ catch (Exception $e)
 }
 
 $email = $_SESSION[email];
-$resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email = '$email' ");
+$resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email = '$email' ; ");
 		
 	if ($resultat) 
 	{

@@ -31,8 +31,8 @@ create table Coach (
 create table Adherant (
 	nom 			varchar(30) 	not null, 
 	prenom 			varchar(30) 	not null, 
-	email 			varchar(56) 	not null, 
-	mdp 			varchar(100) 	not null,
+	email 			varchar(50) 	not null, 
+	mdp 			varchar(50) 	not null,
 	poids 			int(3) 			not null,
 	age 			int(3) 			not null,
 	taille 			int(3) 			not null,
