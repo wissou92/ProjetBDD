@@ -77,15 +77,40 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
 
 <div  class = "main"> 
 	<div>
-	<input  id ="btbody" type ="submit" value ="Programmes" > </input>
+	<input  id ="btbody" type ="submit" value ="Programmes" name="Programmes" > </input>
+	 <?php
+	 	     if(isset($_POST['Programmes']) && $_POST['Programmes'] =='Programmes')
+	 	     {
+	 	     	$_SESSION["email"] = $email ; 
+				header('location:http://localhost/ProjetBDD/Site/Programmes.php');
+				exit;
+	 	     }
+	 ?>
 	</div>
 
 	<div>
-	<input id ="btbody" type ="submit" value ="Coaching">  </input>
+	<input id ="btbody" type ="submit" value ="Coaching" name ="Coaching">  </input>
+
+	<?php
+	 	     if(isset($_POST['Coaching']) && $_POST['Coaching'] =='Coaching')
+	 	     {
+	 	     	$_SESSION["email"] = $email ; 
+				header('location:http://localhost/ProjetBDD/Site/Coaching.php');
+				exit;
+	 	     }
+	 ?>
 	</div>
 
 	<div>
-	<input id ="btbody"type ="submit" value ="Mes Programmes"></input>
+	<input id ="btbody"type ="submit" value ="Mes Programmes" name="MesProg"></input>
+			<?php
+	 	     if(isset($_POST['MesProg']) && $_POST['MesProg'] =='Mes Programmes')
+	 	     {
+	 	     	$_SESSION["email"] = $email ; 
+				header('location:http://localhost/ProjetBDD/Site/MesProgrammes.php');
+				exit;
+	 	     }
+	 ?>
 	</div>
 
 	 
