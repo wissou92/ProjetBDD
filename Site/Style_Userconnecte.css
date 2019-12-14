@@ -13,9 +13,10 @@ h1{
    
 }
 
-#dec{
+#b1,#b2{
 	float: right;
-	border-radius: 10px;
+	border-radius: 10px ;
+	border-color: white;
 	background-color: #ffa259;
 	
 }

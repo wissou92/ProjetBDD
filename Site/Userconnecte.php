@@ -8,6 +8,7 @@
 	
 	<link rel="stylesheet" type="text/css"  href="Style_Userconnecte.css">
 	<section  id = "np">
+
 <?php 
    session_start();  $nom ;  $prenom; 
 try
@@ -34,18 +35,37 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
     printf("Bienvenue %s  %s ",$nom , $prenom);
  ?> 
 
-<div > 
-<form method="post" action="accueil.php">
-	<input id = "dec" type="submit" value="Se déconnecter" name="deconnect" /> </input>
- 
+<div> 
+<form method="post" action="Userconnecte.php">
+<input id = "b1" type="submit" value="Se déconnecter" name="deconnect" /> </input>
+<input id = "b2"  type="submit" value = "Profil" name="Profil" /></input>
+
+
  <?php 
 
  		session_start();
- 		if(isset($_POST['deconnect']) AND $_POST['deconnect']=='Se déconnecter'){
-		session_destroy();
-		header('location:accueil.php');
-		exit;
-	}
+
+ 		// si je vais dans profil  je detruit pas la session 
+ 		//jaurais besoin des informations 
+ 		
+ 		if (isset($_POST['Profil'])&& $_POST['Profil']=='Profil')
+		{
+				$_SESSION["email"] = $email ; 
+				header('location:http://localhost/ProjetBDD/Site/Profil.php');
+				exit;
+		}
+
+ 		if(isset($_POST['deconnect']) && $_POST['deconnect']=='Se déconnecter')
+ 		{
+				session_destroy();
+				header('location:accueil.php');
+				exit;
+		}
+
+		
+
+
+
 ?> 
 </form>
 </div>

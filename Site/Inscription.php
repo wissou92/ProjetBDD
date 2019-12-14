@@ -56,17 +56,12 @@ session_start();
    $nom; $prenom; $email; $mdp; $poids; $age; $taille;   
    				if (isset($_POST))
    				{ 
-
-   			
 				   	if ( isset($_POST['inscrit']) && $_POST['inscrit'] == 'inscription')
 				   {				
 					   try{    
 							$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); $bdd->set_charset("utf8");
 						  }
-					   catch (Exception $e)
-					   						{  
-					   							 die('Erreur : ' . $e->getMessage());
-					   					    }
+					   catch (Exception $e){ die('Erreur : ' . $e->getMessage());}
 
 					   $nom = $_POST['nom_adherant']; 
 					   $prenom =$_POST['prenom_adherant']; 
@@ -76,13 +71,11 @@ session_start();
 					   $age =$_POST['age_adherant']; 
 					   $taille =$_POST['taille_adherant'];
 
-					   	// cest ca marche mais faut securiser le mdp ca je sais pas faire 
-
+					// cest ca marche mais faut securiser le mdp ca je sais pas faire 
 				 	$req = "INSERT INTO Adherant(nom,prenom,email,mdp,poids,age,taille) 
 					VALUES('$nom','$prenom','$email', '$mdp',$poids,$age,$taille);";
 
-
-					    $result = $bdd-> query($req) or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+					$result = $bdd-> query($req) or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
 
 					    
 				  
