@@ -6,22 +6,23 @@
 	<title>Inscription</title>
 	<link rel="stylesheet" type="text/css" href="style_inscription.css">
 </head>
-<body>
+	<body>
 	<form method="post" action="Inscription.php">
-		<div class="formulaire">
-			<p>Inscrivez-vous</p>
-		</div>
-		<div class="formulaire">
 
-
-			<label for="prenom">Prénom :</label>
-			<input type="text" id="prenom" name="prenom_adherant" required>
-			
+		<div class="formulaire">
+		<p>Inscrivez-vous</p>
 		</div>
+		
+		<div class="formulaire">
+		<label for="prenom">Prénom :</label>
+		<input type="text" id="prenom" name="prenom_adherant" required>	
+		</div>
+
 		<div class="formulaire">
 			<label for="nom">Nom :</label>
 			<input type="text" id="nom" name="nom_adherant" required>
 		</div>
+
 		<div class="formulaire">
 			<label for="email">E-mail :</label>
 			<input type="email" id="email" name="email_adherant" required>
@@ -36,6 +37,7 @@
 			<label for="age">age :</label>
 			<input type="number" id="age" name="age_adherant" required>
 		</div>
+		
 		<div class="formulaire">
 			<label for="poids">poids :</label>
 			<input type="number" id="poids" name="poids_adherant" required>
@@ -46,7 +48,6 @@
 			<input type="number" id="taille" name="taille_adherant" required>
 		</div>
 		
-
 		<div class="formulaire" id="button">
 			<input type="submit" id="envoi" name = "inscrit"  value="inscription">
 		</div>
@@ -76,9 +77,7 @@ session_start();
 					VALUES('$nom','$prenom','$email', '$mdp',$poids,$age,$taille);";
 
 					$result = $bdd-> query($req) or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
-
-					    
-				  
+					
 					}
 
 }

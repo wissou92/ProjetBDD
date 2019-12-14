@@ -8,7 +8,7 @@
 <body>
 	<form method="post" action="">
 		<div class="formulaire">
-			<p>Connectez-vous</p>
+		<p>Connectez-vous</p>
 		</div>
 			<div class="formulaire">
 			<label for="identifiant">email:</label>
@@ -20,7 +20,7 @@
 			<input type="password" id="mdp" name="mdp_adherent" required>
 			</div>
 			
-			<div class="formulaire" id="inscription">
+			<div class="formulaire" id="connexion">
 			<p><a href="Inscription.php" >Pas encore membre ?</a></p>
 			</div>
 			
@@ -28,14 +28,20 @@
 			<input  type="submit" id="envoi"   value = "connexion" name = connexion ></input>
 			</div>
 	</form>
- <?php 
- session_start();
-  $email ; $mdp;  
+<?php 
+	 session_start(); $email ; $mdp;  
+  	
    if( isset($_POST))
    {
-   	 if(!empty($_POST['email_adherent'])){ $email = $_POST['email_adherent'];}
+   	 if(!empty($_POST['email_adherent']))
+   	 	{ 
+   	 		$email = $_POST['email_adherent'];
+   	 	}
 
-   	 if(!empty($_POST['mdp_adherent'])){  $mdp = $_POST['mdp_adherent'];}
+   	 if(!empty($_POST['mdp_adherent']))
+   	 	{  
+   	 		$mdp = $_POST['mdp_adherent'];
+   	 	}
 
     if ($_POST['connexion'] ==  'connexion')
     {
@@ -46,6 +52,9 @@
 													
 													$resultat = $bdd -> query ("select email,mdp from Adherant where email = '$email' and mdp = '$mdp' ;");
 												
+											         // je garde lemail de ladherant 
+													 // et la session 
+													 // pour recup ses information dans sa propre page  
 											         if( mysqli_num_rows($resultat))
 											        {
 														$_SESSION["email"] = $email ; 
@@ -55,9 +64,7 @@
 											}
 											catch (Exception $e){    die('Erreur : ' . $e->getMessage());}
 
-	}
-    }
-
+	}}
 ?>
 </body>
 </html>

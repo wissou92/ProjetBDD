@@ -28,8 +28,7 @@
 			      $prenom = $row [1];
 			      $poids =$row[2]; 
 			      $age = $row[3]; 
-			      $taille = $row[4]; 
-			      echo '  '.$nom.' '.$prenom; 
+			      $taille = $row[4];  
 			    }
 				
 			?></p>

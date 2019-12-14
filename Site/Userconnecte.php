@@ -7,7 +7,8 @@
 	</title>
 	
 	<link rel="stylesheet" type="text/css"  href="Style_Userconnecte.css">
-	<section  id = "np">
+<div class = "header" > 	
+<div id = "np">
 
 <?php 
    session_start();  $nom ;  $prenom; 
@@ -34,11 +35,11 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
      
     printf("Bienvenue %s  %s ",$nom , $prenom);
  ?> 
-
-<div> 
+</div>
+<div id= "pro-dec"> 
 <form method="post" action="Userconnecte.php">
 <input id = "b1" type="submit" value="Se déconnecter" name="deconnect" /> </input>
-<input id = "b2"  type="submit" value = "Profil" name="Profil" /></input>
+<input id = "b2" type="submit" value = "Profil" name="Profil" /></input>
 
 
  <?php 
@@ -61,22 +62,36 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
 				header('location:accueil.php');
 				exit;
 		}
-
-		
-
-
-
 ?> 
-</form>
+
+</div>
 </div>
 
 </head>
 
+
+<h1>Programmes Sportifs</h1>
+
 <body>
-	<h1>Programmes Sportifs</h1>
+	
 
- </section>
+<div  class = "main"> 
+	<div>
+	<input  id ="btbody" type ="submit" value ="Programmes" > </input>
+	</div>
 
+	<div>
+	<input id ="btbody" type ="submit" value ="Coaching">  </input>
+	</div>
+
+	<div>
+	<input id ="btbody"type ="submit" value ="Mes Programmes"></input>
+	</div>
+
+	 
+	
+ </div>
 
 </body>
+</form>
 </html>
