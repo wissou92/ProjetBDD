@@ -106,61 +106,73 @@ $resultat = $bdd->query("select nom, categorie_programme, prix, description, dif
   
 
   <div  class ="main">
-	 <div class = "sous-class">
+	 <div >
 	 	<?php   echo '<h3>'.$tab[0][0].'</h3>';
-	 			echo '<p>catégorie:'.$tab[0][1].'<p3>';
-	 			echo '<p>prix:'.$tab[0][2].'$<p3>';
-	 			echo '<p>difficulté:'.$tab[0][4].'/20<p3>';
+	 			echo '<p>Catégorie: '.$tab[0][1].'<p3>';
+	 			echo '<p>Prix: '.$tab[0][2].'$<p3>';
+	 			echo '<p>Difficulté: '.$tab[0][4].'/20<p3>';
 	 			echo '<p>'.$tab[0][3].'<p3>';
 
 
 	 	 ?>
 	 	
+	 	<input    id = "bt" value="En savoir plus"  type = submit  name = "ma" > 
+	 	<input    id = "bt" value="Acheter"  type = submit  name = "ma" > 
 	 </div>
 
-	<div   class = "sous-class">
+	<div  id ="avatar" >
+			
 	 	<?php   echo '<h3>'.$tab[1][0].'</h3>';
-	 			echo '<p>catégorie:'.$tab[1][1].'<p3>';
-	 			echo '<p>prix:'.$tab[1][2].'$<p3>';
-	 			echo '<p>difficulté:'.$tab[1][4].'/20<p3>';
+	 			echo '<p>Catégorie: '.$tab[1][1].'<p3>';
+	 			echo '<p>Prix: '.$tab[1][2].'$<p3>';
+	 			echo '<p>Difficulté: '.$tab[1][4].'/20<p3>';
 	 			echo '<p>'.$tab[1][3].'<p3>';
 
-
 	 	 ?>	
-	 </div>  
+	 	 	<input    id = "bt" value="En savoir plus"  type = submit  name = "rf30j" >
+	 	 	<input    id = "bt" value="Acheter"  type = submit  name = "rf30j" >
 
-	<div class = "sous-class">
+
+	 </div>
+	 	 </a> 
+
+	<div >
 	 	<?php   echo '<h3>'.$tab[2][0].'</h3>';
-	 			echo '<p>catégorie:'.$tab[2][1].'<p3>';
-	 			echo '<p>prix:'.$tab[2][2].'$<p3>';
-	 			echo '<p>difficulté:'.$tab[2][4].'/20<p3>';
+	 			echo '<p>Catégorie: '.$tab[2][1].'<p3>';
+	 			echo '<p>Prix: '.$tab[2][2].'$<p3>';
+	 			echo '<p>Difficulté: '.$tab[2][4].'/20<p3>';
 	 			echo '<p>'.$tab[2][3].'<p3>';
 
 
 	 	 ?>
+	 	 <input    id = "bt" value="En savoir plus"  type = submit  name = "ran" > 
+	 	 <input    id = "bt" value="Acheter"  type = submit  name = "ran" >
 	 </div> 
 
-	 <div class = "sous-class">
+	 <div >
 	 	<?php   echo '<h3>'.$tab[3][0].'</h3>';
-	 			echo '<p>catégorie:'.$tab[3][1].'<p3>';
-	 			echo '<p>prix:'.$tab[3][2].'$<p3>';
-	 			echo '<p>difficulté:'.$tab[3][4].'/20<p3>';
+	 			echo '<p>Catégorie: '.$tab[3][1].'<p3>';
+	 			echo '<p>Prix: '.$tab[3][2].'$<p3>';
+	 			echo '<p>Difficulté: '.$tab[3][4].'/20<p3>';
 	 			echo '<p>'.$tab[3][3].'<p3>';
 
 
 	 	 ?>
+	 	  <input    id = "bt" value="En savoir plus"  type = submit  name = "100jr" > 
+	 	  <input    id = "bt" value="Acheter"  type = submit  name = "100jr" > 
 	 </div>
 
-	 <div class = "sous-class">
+	 <div>
 	 	<?php   echo '<h3>'.$tab[4][0].'</h3>';
-	 			echo '<p>catégorie:'.$tab[4][1].'<p3>';
-	 			echo '<p>prix:'.$tab[4][2].'$<p3>';
-	 			echo '<p>difficulté:'.$tab[4][4].'/20<p3>';
+	 			echo '<p>Catégorie: '.$tab[4][1].'<p3>';
+	 			echo '<p>Prix: '.$tab[4][2].'$<p3>';
+	 			echo '<p>Difficulté: '.$tab[4][4].'/20<p3>';
 	 			echo '<p>'.$tab[4][3].'<p3>';
 
 
 	 	 ?>
-	 	
+	 	<input    id = "bt" value="En savoir plus"  type = submit  name = "mf" >
+	 	<input    id = "bt" value="Acheter"  type = submit  name = "mf" >  
 	 </div> 
  
 

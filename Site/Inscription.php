@@ -50,6 +50,7 @@
 		
 		<div class="formulaire" id="button">
 			<input type="submit" id="envoi" name = "inscrit"  value="inscription">
+			<button  id = "envoi"  onclick="window.location.href='http://localhost/ProjetBDD/Site/Connexion.php'">Connexion</button> 
 		</div>
 	</form>
 <?php
