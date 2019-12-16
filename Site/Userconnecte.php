@@ -45,10 +45,6 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
  <?php 
 
  		session_start();
-
- 		// si je vais dans profil  je detruit pas la session 
- 		//jaurais besoin des informations 
- 		
  		if (isset($_POST['Profil'])&& $_POST['Profil']=='Profil')
 		{
 				$_SESSION["email"] = $email ; 
