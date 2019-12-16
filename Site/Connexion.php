@@ -40,7 +40,7 @@
 
    	 if(!empty($_POST['mdp_adherent']))
    	 	{  
-   	 		$mdp = $_POST['mdp_adherent'];
+   	 		$mdp = md5($_POST['mdp_adherent']);
    	 	}
 
     if ($_POST['connexion'] ==  'connexion')

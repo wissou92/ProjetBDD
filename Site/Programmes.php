@@ -46,13 +46,15 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
  		// si je vais dans profil  je detruit pas la session 
  		//jaurais besoin des informations 
 
- 		if (isset($_POST['Profil'])&& $_POST['Profil']=='Profil'){
+ 		if (isset($_POST['Profil'])&& $_POST['Profil']=='Profil')
+ 		{
 				$_SESSION["email"] = $email ; 
 				header('location:http://localhost/ProjetBDD/Site/Profil.php');
 				exit;
 		}
 
- 		if(isset($_POST['deconnect']) && $_POST['deconnect']=='Se déconnecter'){
+ 		if(isset($_POST['deconnect']) && $_POST['deconnect']=='Se déconnecter')
+ 		{
 				session_destroy();
 				header('location:accueil.php');
 				exit;
@@ -84,11 +86,10 @@ catch (Exception $e)
 }
 
 $email = $_SESSION[email];
-$resultat = $bdd->query("select nom, categorie_programme, prix, description, difficulte, avis from Programme ; ");
+	$resultat = $bdd->query
+	("select nom, categorie_programme, prix, description, difficulte, avis from Programme ; ");
     $tab[5][5];
 	
-	// chaque ligne contient un programme 
-	// colonne : nom  categorie prix  description difficulté 
 	for ($it = 0 ; $it< 5 ; $it++)
 	{
     
@@ -102,49 +103,44 @@ $resultat = $bdd->query("select nom, categorie_programme, prix, description, dif
 
  ?> 
 
-
-  
-
   <div  class ="main">
 
 
 	 <div >
-
 	 <input    id = "bt" value="En savoir plus"  type = submit  name = "m" >
-	 <?php   echo '<h3>'.$tab[0][0].'</h3>';
+	 <?php
+	 	     echo '<h3>'.$tab[0][0].'</h3>';
 			 echo '<p>Catégorie: '.$tab[0][1].'<p>';
 			 echo '<p>Prix: '.$tab[0][2].'$<p>';
 			 echo '<p>Difficulté: '.$tab[0][4].'/20<p>';
 			 echo '<p>'.$tab[0][3].'<p>';
 
-															if (isset($_POST['m']) && $_POST['m']=='En savoir plus')
-															{
-																$_SESSION['nom']= $tab[0][1]; 
-																$_SESSION['email'] = $email; 
-																header('location:http://localhost/ProjetBDD/Site/Exercice.php');
-																exit;
-															}
+		if (isset($_POST['m']) && $_POST['m']=='En savoir plus')
+		{
+			$_SESSION['nom']= $tab[0][1]; 
+			$_SESSION['email'] = $email; 
+			header('location:http://localhost/ProjetBDD/Site/Exercice.php');
+			exit;
+		}											
+		?>
+	</div>
 
-													?>     
-								 	</div>
-
-		<div>  
-			<input    id = "bt" value="En savoir plus"  type = submit  name = "ma">
-	 	<?php   echo '<h3>'.$tab[1][0].'</h3>';
-	 			echo '<p>Catégorie: '.$tab[1][1].'<p>';
-	 			echo '<p>Prix: '.$tab[1][2].'$<p>';
-	 			echo '<p>Difficulté: '.$tab[1][4].'/20<p>';
-	 			echo '<p>'.$tab[1][3].'<p>';
-															if (isset($_POST['ma']) && $_POST['ma']=='En savoir plus')
-															{
-																$_SESSION['nom']= $tab[1][1]; 
-																$_SESSION['email'] = $email; 
-																header('location:http://localhost/ProjetBDD/Site/Exercice.php');
-																exit;
-															}
-																	?>
-
-		</div>
+	<div>  
+	<input    id = "bt" value="En savoir plus"  type = submit  name = "ma">
+	<?php   echo '<h3>'.$tab[1][0].'</h3>';
+	 		echo '<p>Catégorie: '.$tab[1][1].'<p>';
+	 		echo '<p>Prix: '.$tab[1][2].'$<p>';
+	 		echo '<p>Difficulté: '.$tab[1][4].'/20<p>';
+	 		echo '<p>'.$tab[1][3].'<p>';
+			if (isset($_POST['ma']) && $_POST['ma']=='En savoir plus')
+			{
+				$_SESSION['nom']= $tab[1][1]; 
+				$_SESSION['email'] = $email; 
+			    header('location:http://localhost/ProjetBDD/Site/Exercice.php');
+				exit;
+			}
+	 ?>
+	</div>
 	  
 
 	<div >
@@ -156,56 +152,50 @@ $resultat = $bdd->query("select nom, categorie_programme, prix, description, dif
 	 			echo '<p>'.$tab[2][3].'<p>';
 
 
-															if (isset($_POST['ran']) && $_POST['ran']=='En savoir plus')
-															{
-																$_SESSION['nom']= $tab[2][1]; 
-																$_SESSION['email'] = $email; 
-																header('location:http://localhost/ProjetBDD/Site/Exercice.php');
-																exit;
-															}
-																	?>
-	 	
+		    if (isset($_POST['ran']) && $_POST['ran']=='En savoir plus')
+		    {
+				$_SESSION['nom']= $tab[2][1]; 
+				$_SESSION['email'] = $email; 
+				header('location:http://localhost/ProjetBDD/Site/Exercice.php');
+				exit;
+			}
+		?>
 	 </div> 
 
 	 <div >
-	 	<input    id = "bt" value="En savoir plus"  type = "submit"  name = "100jr" >
-	 	<?php   echo '<h3>'.$tab[3][0].'</h3>';
+	 <input    id = "bt" value="En savoir plus"  type = "submit"  name = "100jr" >
+	 <?php      echo '<h3>'.$tab[3][0].'</h3>';
 	 			echo '<p>Catégorie: '.$tab[3][1].'<p>';
 	 			echo '<p>Prix: '.$tab[3][2].'$<p>';
 	 			echo '<p>Difficulté: '.$tab[3][4].'/20<p>';
 	 			echo '<p>'.$tab[3][3].'<p>';
 	 	   
-															if (isset($_POST['100j']) && $_POST['100jr']=='En savoir plus')
-															{
-																$_SESSION['nom']= $tab[3][1]; 
-																$_SESSION['email'] = $email; 
-																header('location:http://localhost/ProjetBDD/Site/Exercice.php');
-																exit;
-															}
-																	?>
-	 	 
+			if (isset($_POST['100j']) && $_POST['100jr']=='En savoir plus')
+			{
+				$_SESSION['nom']= $tab[3][1]; 
+				$_SESSION['email'] = $email; 
+				header('location:http://localhost/ProjetBDD/Site/Exercice.php');
+				exit;
+			}
+		?> 
 	 </div>
 
 	 <div>
-	 	<input    id = "bt" value="En savoir plus"  type = "submit"  name = "mf" >
-	 	<?php   echo '<h3>'.$tab[4][0].'</h3>';
+	 <input    	id = "bt" value="En savoir plus"  type = "submit"  name = "mf" >
+	 <?php  	echo '<h3>'.$tab[4][0].'</h3>';
 	 			echo '<p>Catégorie: '.$tab[4][1].'<p3>';
 	 			echo '<p>Prix: '.$tab[4][2].'$<p3>';
 	 			echo '<p>Difficulté: '.$tab[4][4].'/20<p3>';
 	 			echo '<p>'.$tab[4][3].'<p3>';
 
 	 			if (isset($_POST['mf']) && $_POST['mf']=='En savoir plus')
-															{
-																$_SESSION['nom']= $tab[4][1]; 
-																$_SESSION['email'] = $email; 
-																header('location:http://localhost/ProjetBDD/Site/Exercice.php');
-																exit;
-															}
-
-
+	 			{
+					$_SESSION['nom']= $tab[4][1]; 
+					$_SESSION['email'] = $email; 
+					header('location:http://localhost/ProjetBDD/Site/Exercice.php');
+					exit;
+				}
 	 	 ?>
-	 	
-	 	 
 	 </div> 
  
 

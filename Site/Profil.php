@@ -18,7 +18,8 @@
 				}
 				catch (Exception $e){   die('Erreur : ' . $e->getMessage());}	
 				
-				$resultat = $bdd->query("select nom ,prenom,poids,age,taille from Adherant where Adherant.email = '$_SESSION[email]' ; ");
+				$resultat = $bdd->query
+				("select nom ,prenom,poids,age,taille from Adherant where Adherant.email = '$_SESSION[email]' ; ");
 		
 				if ($resultat) 
 				{
@@ -73,48 +74,85 @@
 		<input  type="submit" id="envoi"   value = "enregistrer" name = "enregistrer" ></input>
 		</div>
 	</form>
-
+<div> 
 <?php
 	if( isset($_POST))
    {
    	 
     if ($_POST['enregistrer'] ==  'enregistrer' && isset($_POST['enregistrer']))
     {
-    	try
-			{    
-					$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); $bdd->set_charset("utf8");
+    	try{    
+			$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+			$bdd->set_charset("utf8");
 			}
 			catch (Exception $e){   die('Erreur : ' . $e->getMessage());}	
-						
-	
+			
 	 if(!empty($_POST['mdp_adherant'])){  
 	  		$mdp = $_POST['mdp_adherant'];	
 	  		echo $mdp.'<br>';
 	  		echo $_POST['mdp_adherant'];					
-	echo $resultat =$bdd -> query (" update Adherant  set Adherant.mdp = '$mdp' where Adherant.email = '$_SESSION[email]' ;")
+			$resultat =$bdd -> query 
+			(" update Adherant  set Adherant.mdp = '$mdp' where Adherant.email = '$_SESSION[email]' ;")
 			or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
 	  }
 
 	   if(!empty($_POST['email_adherant']))
 	  {  
 	  		$email = $_POST['email_adherant'];							
-			$resultat = $bdd -> query (" update Adherant  set mdp = '$email' where Adherant.email = '$_SESSION[email]';") or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+			$resultat = $bdd -> query 
+			(" update Adherant  set mdp = '$email' where Adherant.email = '$_SESSION[email]';") 
+			or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
 			$_SESSION[email] = $email ;
 	  }
 	  if(!empty($_POST['poids_adherant']))
 	  {  
 	  		$poids = $_POST['poids_adherant'];							
-			$resultat = $bdd -> query (" update Adherant  set poids = $poids where Adherant.email = '$_SESSION[email]';") or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+			$resultat = $bdd -> query 
+			(" update Adherant  set poids = $poids where Adherant.email = '$_SESSION[email]';")
+			 or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
 	  }	
 	  if(!empty($_POST['taille_adherant']))
 	  {  
 	  		$taille = $_POST['taille_adherant'];							
-			echo $resultat = $bdd -> query (" update Adherant  set taille =  $taille  where Adherant.email = '$_SESSION[email]' ;")  or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+			echo $resultat = $bdd -> query
+			(" update Adherant  set taille =  $taille  where Adherant.email = '$_SESSION[email]' ;") 
+			 or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
 	  }	
 	
 	}
   }
-?>
+
+  ?>
+   </div>
+
+   <div> 
+   <?php
+			try{    
+					$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+					$bdd->set_charset("utf8");
+			}
+			
+			catch (Exception $e){   die('Erreur : ' . $e->getMessage());}
+
+			$resultat = $bdd -> query 
+			(" select  Imc.imc
+			 from  Imc   
+			 where '$prenom'  = Imc.prenom  
+			 and   '$nom' = Imc.nom ;")
+			or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+
+			 if ($row = $resultat->fetch_row())
+			 {
+			 	    if ($row[0] >18 && $row[0] < 25 ) echo'votre imc est de : '.$row[0].'votre corpulence est normale';	
+			 	    else if ($row[0] >18 && $row[0] < 25 ) echo'votre imc est de : '.$row[0].'obésité';
+			 	    else if ($row[0] >30 ) echo'votre imc est de : '.$row[0].'vous etes en surpoids';
+			 	    else echo'votre imc est de : '.$row[0].'maigreur';
+			 }
+
+			  
+		    
+	?>
+  </div> 
 
 </body>
 </html>

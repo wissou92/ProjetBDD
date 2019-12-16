@@ -68,7 +68,7 @@ session_start();
 					   $nom = $_POST['nom_adherant']; 
 					   $prenom =$_POST['prenom_adherant']; 
 					   $email = $_POST['email_adherant'];
-					   $mdp =$_POST['mdp_adherant'];
+					   $mdp =md5($_POST['mdp_adherant']);
 					   $poids= $_POST['poids_adherant']; 
 					   $age =$_POST['age_adherant']; 
 					   $taille =$_POST['taille_adherant'];
