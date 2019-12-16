@@ -48,7 +48,7 @@ create table Programme (
 	nom 				varchar(30) 	not null, 
 	categorie_programme enum
 							('musculation'
-							,'remise_en_forme'
+							,'remise en forme'
 							,'relaxation'
 							,'cardio')	not null, 
 
@@ -67,7 +67,7 @@ create table Exercice (
 	nom_exercice 		varchar(30) 	not null, 
 	categorie_exercice  enum
 							('musculation'
-							,'remise_en_forme'
+							,'remise en forme'
 							,'relaxation'
 							,'cardio')	not null,
 	description 		varchar(300) 	not null, 
@@ -86,7 +86,7 @@ create table Conseil_dietetique (
 	nom_conseil   		varchar(30) 	not null, 
 	categorie_conseil 	enum
 							('musculation'
-							,'remise_en_forme'
+							,'remise en forme'
 							,'relaxation'
 							,'cardio')	not null,
 	description 		varchar(200) 	not null, 
@@ -265,7 +265,8 @@ insert into Adherant values
 	('Routhier'		,'David' 		, 'DavidRouthier@dayrep.com'			,'56q5dsqdqds8'	,	67  , 40	, 180 ),
 	('Therriault'	,'Ignace' 		, 'IgnaceTherriault@dayrep.com'			,'jklkjsdlqjdaz',	87  , 35	, 156 ),
 	('Reault'		,'Moore' 		, 'MooreReault@armyspy.com'				,'sqdq,sdknqsd'	,	90	, 30 	, 195 ),
-	('Faure'		,'Beltane' 		, 'BeltaneFaure@teleworm.us'			,'hshqshuydgqsd',	95	, 45	, 167 );
+	('Faure'		,'Beltane' 		, 'BeltaneFaure@teleworm.us'			,'hshqshuydgqsd',	95	, 45	, 167 ),
+	('Elhabar'      ,'Moussa'       , 'moussa.el-habar@ens.uvsq.fr'         , 'moussa'      ,   85   ,35    , 195 );
 
 
 
@@ -273,11 +274,11 @@ insert into Adherant values
 
 insert into Programme (nom, categorie_programme, prix, description, difficulte, avis) values
 
-	('musculation adolescent','musculation',100,'développement des muscles squelettiques, afin dacquérir plus de force, dendurance, de puissance, dexplosivité ou de volume musculaire',015,15),
-	('remise en forme en 30 jours','remise en forme',100,'prendre soin de soi, perdre de la graisse, bouger plus, reprendre le sport ou faire plus de sport',012,15),
-	('remise a niveau : cardio','cardio',100,'renforce tout votre système cardio-vasculaire',015,15),
-	('100 jours pour me relaxer','relaxation',100,'oublie tes probleme et viens danser avec les magic system',020,20),
-	('musculation pour les femmes','musculation',150,'choix  de 20 exercices',017,20);
+	('Musculation adolescent','musculation',100,'Développement des muscles squelettiques, afin dacquérir plus de force, dendurance, de puissance, dexplosivité ou de volume musculaire',015,15),
+	('Remise en forme en 30 jours','remise en forme',100,'Prendre soin de soi, perdre de la graisse, bouger plus, reprendre le sport ou faire plus de sport',012,15),
+	('Remise a niveau','cardio',100,'Renforce tout votre système cardio-vasculaire',015,15),
+	('100 jours pour me relaxer','relaxation',100,'Oublies tes problèmes et viens danser avec les magic system',020,20),
+	('Musculation pour les femmes','musculation',150,'Choix  de 20 exercices',017,20);
 
 
 insert into Exercice (id_programme, nom_exercice, categorie_exercice, description, prix_exercice) values
@@ -320,8 +321,9 @@ insert into Exercice (id_programme, nom_exercice, categorie_exercice, descriptio
 
 	insert  into Pratique values 
 		('2015-02-12','2018-08-12',15,'LeverettBosse@jourrapide.com',001),
-		('2013-07-15','2017-01-18',10,'ArchardTachel@armyspy.com',002);
-
+		('2013-07-15','2017-01-18',10,'ArchardTachel@armyspy.com',002),
+        ('2020-01-12','2022-07-25',20,'moussa.el-habar@ens.uvsq.fr',001),
+        ('2020-02-12','2022-03-30',15,'moussa.el-habar@ens.uvsq.fr',002);
 	insert into Coaching_sportif values 
 
 		('2019-09-12',00,01,'CharlotBoncoeur@jourrapide.com',001),
@@ -330,7 +332,8 @@ insert into Exercice (id_programme, nom_exercice, categorie_exercice, descriptio
 		('2021-07-20',00,06,'IsaacCote@armyspy.com',003),
 		('2021-08-20',15,05,'AntoineSimon@jourrapide.com', 004),
 		('2021-09-21',10,08,'ScovilleGareau@dayrep.com', 005),
-		('2021-09-23',13,09,'CheneyGuernon@jourrapide.com', 006);
+		('2021-09-23',13,09,'CheneyGuernon@jourrapide.com', 006),
+		('2020-02-12',12,10,'moussa.el-habar@ens.uvsq.fr',002);
 		
 
 
