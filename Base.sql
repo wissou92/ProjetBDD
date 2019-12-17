@@ -44,7 +44,7 @@ create table Adherant (
 
 create table Programme (
 
-	id  				int(3) 			not null	auto_increment,
+	id  				int(3) 			not null,
 	nom 				varchar(30) 	not null, 
 	categorie_programme enum
 							('musculation'
@@ -98,7 +98,7 @@ create table Conseil_dietetique (
 
 create table Pratique (
 	date_debut 		date 			not null, 
-	date_fin   		date 			not null, 
+	date_fin   		date, 
 	avis 			int(2)					,
 	email_adherent 	varchar(54) 	not null, 
 	id_programme 	int(3) 			not null, 
@@ -272,13 +272,13 @@ insert into Adherant values
 
 
 
-insert into Programme (nom, categorie_programme, prix, description, difficulte, avis) values
+insert into Programme (id ,nom, categorie_programme, prix, description, difficulte, avis) values
 
-	('Musculation adolescent','musculation',100,'Développement des muscles squelettiques, afin dacquérir plus de force, dendurance, de puissance, dexplosivité ou de volume musculaire',015,15),
-	('Remise en forme en 30 jours','remise en forme',100,'Prendre soin de soi, perdre de la graisse, bouger plus, reprendre le sport ou faire plus de sport',012,15),
-	('Remise a niveau','cardio',100,'Renforce tout votre système cardio-vasculaire',015,15),
-	('100 jours pour me relaxer','relaxation',100,'Oublies tes problèmes et viens danser avec les magic system',020,20),
-	('Musculation pour les femmes','musculation',150,'Choix  de 20 exercices',017,20);
+	(001,'Musculation adolescent','musculation',100,'Développement des muscles squelettiques, afin dacquérir plus de force, dendurance, de puissance, dexplosivité ou de volume musculaire',015,15),
+	(002,'Remise en forme en 30 jours','remise en forme',100,'Prendre soin de soi, perdre de la graisse, bouger plus, reprendre le sport ou faire plus de sport',012,15),
+	(003,'Remise a niveau','cardio',100,'Renforce tout votre système cardio-vasculaire',015,15),
+	(004,'100 jours pour me relaxer','relaxation',100,'Oublies tes problèmes et viens danser avec les magic system',020,20),
+	(005,'Musculation pour les femmes','musculation',150,'Choix  de 20 exercices',017,20);
 
 
 insert into Exercice (id_programme, nom_exercice, categorie_exercice, description, prix_exercice) values
@@ -291,12 +291,12 @@ insert into Exercice (id_programme, nom_exercice, categorie_exercice, descriptio
 	(001,'extensions verticales','musculation', 'exercice qui permet un développement complet du triceps',006),
 	(001,'extensions à la poulie','musculation','sollicite plus efficacement la longue portion du triceps',007),
 	(001,'Développé nuque', 'musculation','exercice pour développer les épaules',003),
-	(001,'crunch sur banc incliné','musculation',' important pour tous ceux qui veulent se muscler les abdos',050),
-	(001,'relevé de jambes','musculation', 'efficace pour muscler les abdos',001),
-	(001,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 010),
-	(001,'fente à la barre','musculation','permet de travailler un grand nombre de muscles au niveau des jambes et de manière unilatérale',000),
-	(001,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',001),
-	(001,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',001),
+	(002,'crunch sur banc incliné','musculation',' important pour tous ceux qui veulent se muscler les abdos',050),
+	(002,'relevé de jambes','musculation', 'efficace pour muscler les abdos',001),
+	(002,'leg extension','musculation',' l’un des meilleurs exercices pour développer et donner de la définition à la partie antérieure de la cuisse (quadriceps)', 010),
+	(002,'fente à la barre','musculation','permet de travailler un grand nombre de muscles au niveau des jambes et de manière unilatérale',000),
+	(002,'soulevé de terre','musculation','Le soulevé de terre jambes tendues très important pour développer et définir l’arrière de la cuisse et les fessiers',001),
+	(002,'Le leg curl','musculation' , 'permet de développer la masse musculaire de la partie postérieure de la cuisse',001),
 
 	
 	(002, 'planche abdominale','remise_en_forme','permet de renforcer les muscles superficiels et profonds des abdominaux',000),
@@ -348,11 +348,11 @@ insert into Exercice (id_programme, nom_exercice, categorie_exercice, descriptio
 
 
 # On calcule le prix d'un programme a partir des exercices et conseils qui le composent
- 	 update  Programme 
-  	 set Programme.prix = (  select sum(D.prix_conseil) + sum(E.prix_exercice)
+ 	/* update  Programme 
+  	 set Programme.prix = (  select sum(D.prix_conseil) + sum(E.prix_exercice) as prix
   	 						from Conseil_dietetique D, Exercice E
   	 						where D.id_programme = Programme.id and E.id_programme = Programme.id
-						);
+						);*/
 
 
 

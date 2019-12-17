@@ -1,3 +1,7 @@
+<?php 
+       print_r($_POST);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -37,7 +41,7 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
  ?> 
 </div>
 <div id= "pro-dec"> 
-<form method="post" action="Userconnecte.php">
+<form method="post" action="#">
 <input id = "b1" type="submit" value="Se déconnecter" name="deconnect" /> </input>
 <input id = "b2" type="submit" value = "Profil" name="Profil" /></input>
 
@@ -106,11 +110,15 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
 						      				$tab[$i][4]= $row1[4];
 
 						 
-						      				 echo '<div><h3>'.$tab[$i][0].'</h3>'.
-								 			 	  '<p>Catégorie: '.$tab[$i][1].'<p>'.
+						      				 echo '<div>
+						      				 <h3>'.$tab[$i][0].'</h3>'.
+								 			 	  '<p>Catégorie: '.$tab[$i][1].'</p>'.
 								 		 		  '<p>Prix: '.$tab[$i][2].'$<p>'.
-								 			 	  '<p>Difficulté: '.$tab[$i][4].'/20<p>'.
-								 			 	  '<p>'.$tab[$i][3].'<p3>'.'</div>';
+								 			 	  '<p>Difficulté: '.$tab[$i][4].'/20</p>'.
+								 			 	  '<p>'.$tab[$i][3].'</p>'.
+								 			 	  '<br></br>'.
+											'<input type="submit" id="bt" name="terminer'.$i.'" value="terminer" required>'.
+												  '</div>';
 								 	
 								 		 	$i = $i +1 ; 
 						   }

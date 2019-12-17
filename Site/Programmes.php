@@ -87,8 +87,9 @@ catch (Exception $e)
 
 $email = $_SESSION[email];
 	$resultat = $bdd->query
-	("select nom, categorie_programme, prix, description, difficulte, avis from Programme ; ");
-    $tab[5][5];
+	("select nom, categorie_programme, prix, description, difficulte,avis ,id 
+		from Programme ; ");
+    $tab[5][6];
 	
 	for ($it = 0 ; $it< 5 ; $it++)
 	{
@@ -96,9 +97,10 @@ $email = $_SESSION[email];
       $row = mysqli_fetch_array($resultat, MYSQLI_NUM);
    	  $tab[$it][0]= $row[0]; 
       $tab[$it][1]= $row [1];
-      $tab[$it][2]= $row[2] ; 
+      $tab[$it][2]= $row[2]; 
       $tab[$it][3]= $row[3]; 
       $tab[$it][4]= $row[4];
+      $tab[$it][6]= $row[6];
     }
 
  ?> 
@@ -107,7 +109,8 @@ $email = $_SESSION[email];
 
 
 	 <div >
-	 <input    id = "bt" value="En savoir plus"  type = submit  name = "m" >
+	 <input    id = "bt" value="En savoir plus"  type = "submit"  name = "m" >
+	 <input    id = "bt" value="Acheter"  type = "submit"  name = "Acheter" >
 	 <?php
 	 	     echo '<h3>'.$tab[0][0].'</h3>';
 			 echo '<p>Catégorie: '.$tab[0][1].'<p>';
@@ -115,18 +118,52 @@ $email = $_SESSION[email];
 			 echo '<p>Difficulté: '.$tab[0][4].'/20<p>';
 			 echo '<p>'.$tab[0][3].'<p>';
 
-		if (isset($_POST['m']) && $_POST['m']=='En savoir plus')
+		if ( $_POST['m']=='En savoir plus')
 		{
 			$_SESSION['nom']= $tab[0][1]; 
 			$_SESSION['email'] = $email; 
 			header('location:http://localhost/ProjetBDD/Site/Exercice.php');
 			exit;
-		}											
+		}	
+		
+		if ($_POST['Acheter']=='Acheter')
+		{
+		
+				   try{    
+						$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+						$bdd->set_charset("utf8");
+					}catch (Exception $e){  die('Erreur : ' . $e->getMessage());}
+			
+				$id = $tab[0][6]; 
+				$verif = $bdd -> query ("select P.id_programme 
+				from Pratique P   
+				where '$email' = P.email_adherent and $id  = id_programme;");
+			if( mysqli_num_rows($verif) == 0)
+			{
+			
+				$req = $bdd->query("select CURRENT_DATE() ;") or die('sql erreur');
+				$row = $req->fetch_row();
+			  	$resultat = 
+			 	$bdd->query( "INSERT INTO Pratique (date_debut , email_adherent , id_programme ) 
+				VALUES( '$row[0]' , '$_SESSION[email]' , $id); "); 
+			   
+			  }
+			  else{
+
+			  	echo 'vous avez deja ce Programme';
+			  }
+		   
+		}
+					
+
+
+
 		?>
 	</div>
 
 	<div>  
-	<input    id = "bt" value="En savoir plus"  type = submit  name = "ma">
+	<input    id = "bt" value="En savoir plus"  type = "submit"  name = "ma">
+	<input    id = "bt" value="Acheter"  type = "submit"  name = "ma" >
 	<?php   echo '<h3>'.$tab[1][0].'</h3>';
 	 		echo '<p>Catégorie: '.$tab[1][1].'<p>';
 	 		echo '<p>Prix: '.$tab[1][2].'$<p>';
@@ -139,12 +176,41 @@ $email = $_SESSION[email];
 			    header('location:http://localhost/ProjetBDD/Site/Exercice.php');
 				exit;
 			}
+			if ($_POST['ma']=='Acheter')
+			{
+				   try{    
+						$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+						$bdd->set_charset("utf8");
+					}catch (Exception $e){  die('Erreur : ' . $e->getMessage());}
+			
+				$id = $tab[1][6]; 
+				$verif = $bdd -> query ("select P.id_programme 
+				from Pratique P   
+				where '$email' = P.email_adherent and $id  = id_programme;");
+			if( mysqli_num_rows($verif) == 0)
+			{
+			
+				$req = $bdd->query("select CURRENT_DATE() ;") or die('sql erreur');
+				$row = $req->fetch_row();
+			  	$resultat = 
+			 	$bdd->query( "INSERT INTO Pratique (date_debut , email_adherent , id_programme ) 
+				VALUES( '$row[0]' , '$_SESSION[email]' , $id); "); 
+			   
+			  }
+			  else{
+
+			  	echo 'vous avez deja ce Programme';
+			  }
+
+		   
+		}
 	 ?>
 	</div>
 	  
 
 	<div >
 		 <input    id = "bt" value="En savoir plus"  type = "submit"  name = "ran" >
+		 <input    id = "bt" value="Acheter"  type = "submit"  name = "ran" >
 	 	<?php   echo '<h3>'.$tab[2][0].'</h3>';
 	 			echo '<p>Catégorie: '.$tab[2][1].'<p>';
 	 			echo '<p>Prix: '.$tab[2][2].'$<p>';
@@ -159,11 +225,40 @@ $email = $_SESSION[email];
 				header('location:http://localhost/ProjetBDD/Site/Exercice.php');
 				exit;
 			}
+
+			if ($_POST['ran']=='Acheter')
+			{
+		try{    
+						$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+						$bdd->set_charset("utf8");
+					}catch (Exception $e){  die('Erreur : ' . $e->getMessage());}
+			
+				$id = $tab[2][6]; 
+				$verif = $bdd -> query ("select P.id_programme 
+				from Pratique P   
+				where '$email' = P.email_adherent and $id  = id_programme;");
+			if( mysqli_num_rows($verif) == 0)
+			{
+			
+				$req = $bdd->query("select CURRENT_DATE() ;") or die('sql erreur');
+				$row = $req->fetch_row();
+			  	$resultat = 
+			 	$bdd->query( "INSERT INTO Pratique (date_debut , email_adherent , id_programme ) 
+				VALUES( '$row[0]' , '$_SESSION[email]' , $id); "); 
+			   
+			  }
+			  else{
+
+			  	echo 'vous avez deja ce Programme';
+			  }
+
+		     }
 		?>
 	 </div> 
 
 	 <div >
 	 <input    id = "bt" value="En savoir plus"  type = "submit"  name = "100jr" >
+	 <input    id = "bt" value="Acheter"  type = "submit"  name = "100jr" >
 	 <?php      echo '<h3>'.$tab[3][0].'</h3>';
 	 			echo '<p>Catégorie: '.$tab[3][1].'<p>';
 	 			echo '<p>Prix: '.$tab[3][2].'$<p>';
@@ -175,13 +270,35 @@ $email = $_SESSION[email];
 				$_SESSION['nom']= $tab[3][1]; 
 				$_SESSION['email'] = $email; 
 				header('location:http://localhost/ProjetBDD/Site/Exercice.php');
-				exit;
+			}
+				if ($_POST['100jr']=='Acheter')
+			{
+		
+				  try{    
+						$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+						$bdd->set_charset("utf8");
+					}catch (Exception $e){  die('Erreur : ' . $e->getMessage());}
+			
+				$id = $tab[3][6]; 
+				$verif = $bdd -> query ("select P.id_programme 
+				from Pratique P   
+				where '$email' = P.email_adherent and $id  = id_programme;");
+			if( mysqli_num_rows($verif) == 0){
+			
+				$req = $bdd->query("select CURRENT_DATE() ;") or die('sql erreur');
+				$row = $req->fetch_row();
+			  	$resultat = 
+			 	$bdd->query( "INSERT INTO Pratique (date_debut , email_adherent , id_programme ) 
+				VALUES( '$row[0]' , '$_SESSION[email]' , $id); "); 
+			   
+			  }else{ echo 'vous avez deja ce Programme';}
 			}
 		?> 
 	 </div>
 
 	 <div>
 	 <input    	id = "bt" value="En savoir plus"  type = "submit"  name = "mf" >
+	 <input    id = "bt" value="Acheter"  type = "submit"  name = "mf" >
 	 <?php  	echo '<h3>'.$tab[4][0].'</h3>';
 	 			echo '<p>Catégorie: '.$tab[4][1].'<p3>';
 	 			echo '<p>Prix: '.$tab[4][2].'$<p3>';
@@ -195,6 +312,33 @@ $email = $_SESSION[email];
 					header('location:http://localhost/ProjetBDD/Site/Exercice.php');
 					exit;
 				}
+				if ($_POST['mf']=='Acheter')
+			{
+		try{    
+						$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+						$bdd->set_charset("utf8");
+					}catch (Exception $e){  die('Erreur : ' . $e->getMessage());}
+			
+				$id = $tab[4][6]; 
+				$verif = $bdd -> query ("select P.id_programme 
+				from Pratique P   
+				where '$email' = P.email_adherent and $id  = id_programme;");
+			if( mysqli_num_rows($verif) == 0)
+			{
+			
+				$req = $bdd->query("select CURRENT_DATE() ;") or die('sql erreur');
+				$row = $req->fetch_row();
+			  	$resultat = 
+			 	$bdd->query( "INSERT INTO Pratique (date_debut , email_adherent , id_programme ) 
+				VALUES( '$row[0]' , '$_SESSION[email]' , $id); "); 
+			   
+			  }
+			  else{
+
+			  	echo 'vous avez deja ce Programme';
+			  }
+
+		     }
 	 	 ?>
 	 </div> 
  

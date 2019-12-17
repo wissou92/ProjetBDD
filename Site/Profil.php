@@ -88,9 +88,8 @@
 			catch (Exception $e){   die('Erreur : ' . $e->getMessage());}	
 			
 	 if(!empty($_POST['mdp_adherant'])){  
-	  		$mdp = $_POST['mdp_adherant'];	
-	  		echo $mdp.'<br>';
-	  		echo $_POST['mdp_adherant'];					
+	  		$mdp = md5($_POST['mdp_adherant']);	
+	  							
 			$resultat =$bdd -> query 
 			(" update Adherant  set Adherant.mdp = '$mdp' where Adherant.email = '$_SESSION[email]' ;")
 			or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
@@ -100,7 +99,7 @@
 	  {  
 	  		$email = $_POST['email_adherant'];							
 			$resultat = $bdd -> query 
-			(" update Adherant  set mdp = '$email' where Adherant.email = '$_SESSION[email]';") 
+			(" update Adherant  set email = '$email' where Adherant.email = '$_SESSION[email]';") 
 			or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
 			$_SESSION[email] = $email ;
 	  }
