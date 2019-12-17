@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	
 	<meta charset="UTF-8">
 	<title>
 		Programmes Sportifs
 	</title>
-	<link rel="stylesheet" type="text/css"  href="Style_Programmes.css">
+	<link rel="stylesheet" type="text/css"  href="">
  	
 
 <form method="post" action="#">
@@ -19,7 +20,9 @@
 <body>
 
 
-  <div> <input    id = "bt" value="Acheter ce Programme"  type = "submit"  name = "prog" ></div>
+  <div> 
+  	<input    id = "bt" value="Acheter ce Programme"  type = "submit"  name = "prog" >
+  </div>
 
 
 	 <div  class ="main">
@@ -56,9 +59,11 @@
 						     				$tab[$i][1]= $row1[1];
 						      				$tab[$i][2]= $row1[2] ; 
 
-						      				echo '<div><h3>'.$tab[$i][0].'</h3>'.
-								 		 		 '<p>Prix: '.$tab[$i][1].'$<p>'.
-								 			 	 '<p>Description: '.$tab[$i][2].'/20<p></div>';
+						      				echo '<div>
+						      					  <h3>'.$tab[$i][0].'</h3>'.
+								 		 		 '<p>Prix: '.$tab[$i][1].'$</p>'.
+								 			 	 '<p>Description: '.$tab[$i][2].'/20<p>
+								 			 	 </div>';
 								 		 	$i = $i +1 ; 
 						   }
 						}
@@ -91,7 +96,7 @@
  ?>
     </div>
 	
-
-</body>
 </form>
+</body>
+
 </html>
