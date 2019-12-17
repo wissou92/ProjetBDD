@@ -7,65 +7,15 @@
 	</title>
 	
 	<link rel="stylesheet" type="text/css"  href="Style_Programmes.css">
-<div class = "header" > 	
-<div id = "np">
+ 
 
-<?php 
-   session_start();  $nom ;  $prenom; 
-try
-{    
-	$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
-	$bdd->set_charset("utf8");
-}
-catch (Exception $e)
-{   
-	die('Erreur : ' . $e->getMessage());
-}
 
-$email = $_SESSION[email];
-$resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email = '$email' ; ");
-		
-	if ($resultat) 
-	{
-      $row = $resultat->fetch_row();
-      $resultat->close();
-      $nom= $row[0]; 
-      $prenom = $row [1];
-    }
-     
-    printf("Bienvenue %s  %s ",$nom , $prenom);
- ?> 
-</div>
-<div id= "pro-dec"> 
-<form method="post" action="Programmes.php">
-<input id = "b1" type="submit" value="Se déconnecter" name="deconnect" /> </input>
-<input id = "b2" type="submit" value = "Profil" name="Profil" /></input>
 
- <?php
- 		session_start();
- 		// si je vais dans profil  je detruit pas la session 
- 		//jaurais besoin des informations 
 
- 		if (isset($_POST['Profil'])&& $_POST['Profil']=='Profil')
- 		{
-				$_SESSION["email"] = $email ; 
-				header('location:http://localhost/ProjetBDD/Site/Profil.php');
-				exit;
-		}
 
- 		if(isset($_POST['deconnect']) && $_POST['deconnect']=='Se déconnecter')
- 		{
-				session_destroy();
-				header('location:accueil.php');
-				exit;
-		}
-?> 
-
-</div>
-</div>
 
 </head>
-
+<form method="post" action="Programmes.php">
 
 <h1>Programmes Sportifs</h1>
 
@@ -119,9 +69,9 @@ $email = $_SESSION[email];
             		echo '<div>
             		<input    id = "bt" value="En savoir plus"  type = "submit"  name = "prog'.$i.'" >
 	 				<input    id = "bt" value="Acheter"  type = "submit"  name = "Acheter'.$i.'" >'.
-	 	           '<h3>'.$tab[0][0].'</h3>
-			        <p>Catégorie: '.$tab[0][1].'</p><p>Prix: '.$tab[0][2].'$</p>
-			        <p>Difficulté: '.$tab[0][4].'/20<p><p>'.$tab[0][3].'</p></div>';
+	 	           '<h3>'.$tab[$i][0].'</h3>
+			        <p>Catégorie: '.$tab[$i][1].'</p><p>Prix: '.$tab[$i][2].'$</p>
+			        <p>Difficulté: '.$tab[$i][4].'/20<p><p>'.$tab[$i][3].'</p></div>';
 			        $i++;	
 
             }
