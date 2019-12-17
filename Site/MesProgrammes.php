@@ -120,14 +120,61 @@ $resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email =
 											'<input type="submit" id="bt" name="terminer'.$i.'" value="terminer" required>'.
 												  '</div>';
 								 	
-								 		 	$i = $i +1 ; 
-						   }
-    			}
+								 		 	$i = $i +1 ;}
+
+								 		 							   }
  
 			else { echo '<div> <p>vous  avez '.$nb.'Programmes<p><div>'; }  
 		 
          ?>
     </div>
+
+ <?php
+
+ 						if ($_POST['terminer0']== 'terminer')
+ 			{
+ 				
+ 				echo 
+ 		     '<div>
+  			  <label for="datee">Sélectionner date :</label>
+    		  <input type="date" id="party" name="datee" min="2020-18-12" max="2030-04-12" required >
+    		  <span class="validity"></span>
+  			  </div>
+  			  <div> <input type="submit" name = "validation" , value = "validation"> </div>';
+
+  			        if ($_POST['validation'] == 'validation')
+  			        {
+  			        	$data = $_POST['datee'];
+
+  			        	try{    
+					$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+					$bdd->set_charset("utf8");
+					}catch (Exception $e){die('Erreur : ' . $e->getMessage());}
+
+		  			$resultat = $bdd->query("update Pratique
+		  			set Pratique.date_fin = '$date' ;")   or die('Erreur SQL !<br>'
+		  			.$sql3.'<br>'.mysqli_error());
+		  			echo
+		  			'<div>
+  			  <label for="party">Sélectionner date :</label>
+    		  <input type="number" min ="0" max="20" name = "notee"
+    		   required ></div>
+  			  <div> <input type="submit" name = "note" , value = "validation"> </div>';
+
+  			          if (isset($_POST['notee'])&&$_POST['note']== 'validation')
+  			          {  
+  			          	 $note= $_POST['notee']; 
+
+  			          	 	$resultat = $bdd->query("update Pratique
+		  			set Pratique.avis = $note ;")  
+		  			 or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+
+		  			 echo'merci !'; 
+
+  			          } 
+  			        }		
+ 			}
+?>
 
 
 </body>

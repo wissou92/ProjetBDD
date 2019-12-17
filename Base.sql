@@ -312,7 +312,6 @@ insert into Exercice (id_programme, nom_exercice, categorie_exercice, descriptio
 
 
 
-
 	insert into Conseil_dietetique (id_programme, nom_conseil, categorie_conseil, description, prix_conseil) values
 
 		(001,'Nutrition et performance','musculation','Transformer les aliments en « carburant » et assurer les nombreuses réactions cellulaires grâce aux vitamines',010),
