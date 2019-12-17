@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css"  href="Style_Programmes.css">
  	
 
-<form method="post" action="Userconnecte.php">
+<form method="post" action="#">
 
 
 </head>
@@ -18,6 +18,8 @@
 
 <body>
 
+
+  <div> <input    id = "bt" value="Acheter ce Programme"  type = "submit"  name = "prog" ></div>
 
 	 <div  class ="main">
        	 <?php 
@@ -59,13 +61,33 @@
 								 		 	$i = $i +1 ; 
 						   }
 						}
-			else { echo 'ce Programme ne contient aucun excercie pour le moment'; }  
+			else { echo 'ce Programme ne contient aucun excercie pour le moment'; } 
+
+
+
+			if ($_POST['prog']=='Acheter ce Programme')
+			{
 			
-		   
-
-
+				$id = $_SESSION['id']; 
+				$email = $_SESSION['email']; 
+				$verif = $bdd -> query ("select P.id_programme 
+				from Pratique P   
+				where '$email' = P.email_adherent and $id  = id_programme;");
+			
+				if( mysqli_num_rows($verif) == 0){
+			
+					$req = $bdd->query("select CURRENT_DATE() ;") or die('sql erreur');
+					$row = $req->fetch_row();
+			  		$resultat = 
+			 		$bdd->query( "INSERT INTO Pratique (date_debut , email_adherent , id_programme ) 
+					VALUES( '$row[0]' , '$_SESSION[email]' , $id); "); 
+			}
+			  else{  echo 'vous avez deja ce Programme';}
+			 
+		} 
+			
 		 
-         ?>
+ ?>
     </div>
 	
 

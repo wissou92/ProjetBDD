@@ -80,6 +80,7 @@ $email = $_SESSION[email];
          for ( $i= 0; $i< $nb ; $i++){
             if ( $_POST['prog'.$i]=='En savoir plus')
 		{
+			$_SESSION['id'] = $tab[$i][6];
 			$_SESSION['nom']= $tab[$i][1]; 
 			$_SESSION['email'] = $email; 
 			header('location:http://localhost/ProjetBDD/Site/Exercice.php');
