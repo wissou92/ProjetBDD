@@ -21,6 +21,7 @@
 
   <div> <input    id = "bt" value="Acheter ce Programme"  type = "submit"  name = "prog" ></div>
 
+
 	 <div  class ="main">
        	 <?php 
        	 session_start();
