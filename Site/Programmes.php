@@ -89,7 +89,7 @@ $email = $_SESSION[email];
 		if ($_POST['Acheter'.$i]=='Acheter')
 		{
 		
-				   try{    
+				 try{    
 						$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
 						$bdd->set_charset("utf8");
 					}catch (Exception $e){  die('Erreur : ' . $e->getMessage());}
@@ -107,13 +107,10 @@ $email = $_SESSION[email];
 			  	$resultat = 
 			 	$bdd->query( "INSERT INTO Pratique (date_debut , email_adherent , id_programme ) 
 				VALUES( '$row[0]' , '$_SESSION[email]' , $id); "); 
-			   
-			  }
-			  else{
-
-			  	echo 'vous avez deja ce Programme';
-			  }
-			 }
+			}
+			  else{  echo 'vous avez deja ce Programme';}
+			 
+		}
 		   
 		}
 
