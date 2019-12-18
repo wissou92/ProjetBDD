@@ -7,68 +7,155 @@
 	</title>
 	
 	<link rel="stylesheet" type="text/css"  href="Style_Programmes.css">
-<div class = "header" > 	
-<div id = "np">
 
-<?php 
-   session_start();  $nom ;  $prenom; 
-try
-{    
-	$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
-	$bdd->set_charset("utf8");
-}
-catch (Exception $e)
-{   
-	die('Erreur : ' . $e->getMessage());
-}
 
-$email = $_SESSION[email];
-$resultat = $bdd->query("select nom ,prenom from Adherant where Adherant.email = '$email' ; ");
-		
-	if ($resultat) 
-	{
-      $row = $resultat->fetch_row();
-      $resultat->close();
-      $nom= $row[0]; 
-      $prenom = $row [1];
-    }
-     
-    printf("Bienvenue %s  %s ",$nom , $prenom);
- ?> 
-</div>
-<div id= "pro-dec"> 
 <form method="post" action="Userconnecte.php">
-<input id = "b1" type="submit" value="Se déconnecter" name="deconnect" /> </input>
-<input id = "b2" type="submit" value = "Profil" name="Profil" /></input>
-
- <?php
- 		session_start();
- 		// si je vais dans profil  je detruit pas la session 
- 		//jaurais besoin des informations 
-
- 		if (isset($_POST['Profil'])&& $_POST['Profil']=='Profil'){
-				$_SESSION["email"] = $email ; 
-				header('location:http://localhost/ProjetBDD/Site/Profil.php');
-				exit;
-		}
-
- 		if(isset($_POST['deconnect']) && $_POST['deconnect']=='Se déconnecter'){
-				session_destroy();
-				header('location:accueil.php');
-				exit;
-		}
-?> 
-
-</div>
-</div>
-
 </head>
 
 <h1>Programmes Sportifs</h1>
-
 <body>
 
+	<div>
+<?php 
+ try{    
+		$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+		$bdd->set_charset("utf8");
+	}
+	catch (Exception $e){die('Erreur : ' . $e->getMessage());}
 
-</body>
+
+?>
+
+	</div>
+
+ <div>
+    <div>
+       	 <?php 
+       	 session_start();
+       	 $email = $_SESSION['email']; 
+				try{    
+					$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+					$bdd->set_charset("utf8");
+				}catch (Exception $e){die('Erreur : ' . $e->getMessage());}
+
+		  	$resultat = $bdd->query("select Cs.date_coaching,C.nom,E. nom_exercice  
+		  		from Coach C , Coaching_sportif  Cs , Exercice E 
+		  		where    
+		  		C.numero = Cs.numero_coach 
+		  		and  E.id_exercice = Cs.code_exercice 
+		  		and Cs.email_adherent = '$email';") 
+		  	or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error()) ;
+
+		  	$req = $bdd->query("select Cs.date_coaching,C.nom,E. nom_exercice  
+		  		from Coach C , Coaching_sportif  Cs , Exercice E 
+		  		where    
+		  		C.numero = Cs.numero_coach 
+		  		and  E.id_exercice = Cs.code_exercice 
+		  		and Cs.email_adherent = '$email';") 
+		  	 or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+
+		  	$nb = 0; 
+			$i= 0; 
+			 
+
+			 while ($row = mysqli_fetch_array($resultat, MYSQLI_NUM)) { $nb += 1 ; }
+		
+          if ( $nb != 0 )
+          {
+						      $tab[$nb][3];   
+						while (  ($row1= mysqli_fetch_array($req, MYSQLI_NUM )) &&  $i  <  $nb )
+						{
+									 		
+									   	 				$tab[$i][0]= $row1[0]; 
+									     				$tab[$i][1]= $row1[1];
+									      				$tab[$i][2]= $row1[2]; 
+								
+									      	echo '<div> <p>date :'.$tab[$i][0].'</p>'.
+											 	 '<p>nom du coach: '.$tab[$i][1].'</p>'.
+											     '<p>nom exercice: '.$tab[$i][2].'$<p>'.
+												 '</div>';
+											 	
+											 		 	$i = $i +1;
+						}
+		   }else 
+				 { 
+				 	echo '<div> <p>vous  avez '.$nb.'Coaching<p><div>'; 
+				 }  
+		
+ 
+			
+         ?>
+    </div>
+
+<div>
+       	 <?php 
+       	 session_start();
+       	 $email = $_SESSION['email']; 
+				try{    
+					$bdd = new mysqli('localhost', 'root', 'user', 'Programmes_Sportifs'); 
+					$bdd->set_charset("utf8");
+				}catch (Exception $e){die('Erreur : ' . $e->getMessage());}
+
+		  	$resultat = $bdd->query("select Cn.date_coaching, C.nom,  Cd.nom_conseil 
+		  							from Coach C , Coaching_nutrition  Cn , Conseil_dietetique Cd 
+		  							where  C.numero = Cn.numero_coach   and  Cd.id_conseil = Cn.code_conseil  and Cn.email_adherent = '$email' ;") 
+		  	or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error()) ;
+
+		  	$req = $bdd->query("select Cn.date_coaching, C.nom,  Cd.nom_conseil 
+		  							from Coach C , Coaching_nutrition  Cn , Conseil_dietetique Cd 
+		  							where  C.numero = Cn.numero_coach   and  Cd.id_conseil = Cn.code_conseil  and Cn.email_adherent = '$email' ;") 
+		  	 or die('Erreur SQL !<br>'.$sql3.'<br>'.mysqli_error());
+
+		  	$nb = 0; 
+			$i= 0; 
+			 
+
+			 while ($row = mysqli_fetch_array($resultat, MYSQLI_NUM)) { $nb += 1 ; }
+		
+          if ( $nb != 0 )
+          {
+						      $tab[$nb][3];   
+						while (  ($row1= mysqli_fetch_array($req, MYSQLI_NUM )) &&  $i  <  $nb )
+						{
+									 		
+									   	 				$tab[$i][0]= $row1[0]; 
+									     				$tab[$i][1]= $row1[1];
+									      				$tab[$i][2]= $row1[2]; 
+								
+									      	echo '<div> <p>date :'.$tab[$i][0].'</p>'.
+											 	 '<p>nom du coach: '.$tab[$i][1].'</p>'.
+											     '<p>nom conseil: '.$tab[$i][2].'$<p>'.
+												 '</div>';
+											 	
+											 		 	$i = $i +1;
+						}
+		   }else 
+				 { 
+				 	echo '<div> <p>vous  avez '.$nb.'Coaching<p><div>'; 
+				 }  
+		
+ 
+			
+         ?>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </form>
+</body>
+
 </html>
